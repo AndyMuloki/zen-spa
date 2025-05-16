@@ -1,0 +1,105 @@
+import type { Express } from "express";
+import { createServer, type Server } from "http";
+import { storage } from "./storage";
+import { insertBookingSchema } from "@shared/schema";
+import { ZodError } from "zod";
+import { fromZodError } from "zod-validation-error";
+
+export async function registerRoutes(app: Express): Promise<Server> {
+  // prefix all routes with /api
+
+  // Get all services
+  app.get("/api/services", async (req, res) => {
+    try {
+      const services = await storage.getAllServices();
+      res.json(services);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+      res.status(500).json({ message: "Failed to retrieve services" });
+    }
+  });
+
+  // Get all therapists
+  app.get("/api/therapists", async (req, res) => {
+    try {
+      const therapists = await storage.getAllTherapists();
+      res.json(therapists);
+    } catch (error) {
+      console.error("Error fetching therapists:", error);
+      res.status(500).json({ message: "Failed to retrieve therapists" });
+    }
+  });
+
+  // Get all packages
+  app.get("/api/packages", async (req, res) => {
+    try {
+      const packages = await storage.getAllPackages();
+      res.json(packages);
+    } catch (error) {
+      console.error("Error fetching packages:", error);
+      res.status(500).json({ message: "Failed to retrieve packages" });
+    }
+  });
+
+  // Get all testimonials
+  app.get("/api/testimonials", async (req, res) => {
+    try {
+      const testimonials = await storage.getAllTestimonials();
+      res.json(testimonials);
+    } catch (error) {
+      console.error("Error fetching testimonials:", error);
+      res.status(500).json({ message: "Failed to retrieve testimonials" });
+    }
+  });
+
+  // Create a new booking
+  app.post("/api/bookings", async (req, res) => {
+    try {
+      const validatedData = insertBookingSchema.parse(req.body);
+      const booking = await storage.createBooking(validatedData);
+      res.status(201).json(booking);
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      
+      if (error instanceof ZodError) {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation error",
+          errors: validationError.details 
+        });
+      }
+      
+      res.status(500).json({ message: "Failed to create booking" });
+    }
+  });
+
+  // Get available time slots for a specific date, service/package, and therapist
+  app.get("/api/availability", async (req, res) => {
+    try {
+      const { date, serviceId, packageId, therapistId } = req.query;
+      
+      // Validate required parameters
+      if (!date || (!serviceId && !packageId) || !therapistId) {
+        return res.status(400).json({ 
+          message: "Missing required parameters: date, serviceId/packageId, and therapistId" 
+        });
+      }
+
+      const availableTimeSlots = await storage.getAvailableTimeSlots(
+        date as string,
+        serviceId ? parseInt(serviceId as string) : undefined,
+        packageId ? parseInt(packageId as string) : undefined,
+        parseInt(therapistId as string)
+      );
+      
+      res.json(availableTimeSlots);
+    } catch (error) {
+      console.error("Error fetching availability:", error);
+      res.status(500).json({ message: "Failed to retrieve availability" });
+    }
+  });
+
+  const httpServer = createServer(app);
+
+  return httpServer;
+}

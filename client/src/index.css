@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --primary: 152 18% 65%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 200 32% 74%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 40 27% 78%;
+  --accent-foreground: 24 9.8% 10%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --border: 25 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --ring: 152 18% 65%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 152 18% 35%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 200 32% 34%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 40 27% 48%;
+  --accent-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 152 18% 35%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-800 font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto;
+  }
+  
+  .btn-primary {
+    @apply bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-md transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-white bg-opacity-20 hover:bg-opacity-30 text-white border border-white border-opacity-40 px-6 py-3 rounded-md text-center transition-colors;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-serif text-gray-800;
+  }
+  
+  .section-divider {
+    @apply w-20 h-1 bg-teal-600 mx-auto my-6;
+  }
+  
+  .booking-calendar .date-cell {
+    @apply transition-all duration-300;
+  }
+  
+  .booking-calendar .date-cell:hover:not(.unavailable) {
+    @apply bg-teal-200 transform scale-105;
+  }
+  
+  .booking-calendar .date-cell.unavailable {
+    @apply opacity-40 cursor-not-allowed;
+  }
+  
+  .booking-calendar .date-cell.selected {
+    @apply bg-teal-600 text-white transform scale-105;
+  }
+  
+  [data-animate] {
+    @apply opacity-0 transform translate-y-5 transition-all duration-500;
+  }
+  
+  [data-animate].animated {
+    @apply opacity-100 translate-y-0;
+  }
+}
