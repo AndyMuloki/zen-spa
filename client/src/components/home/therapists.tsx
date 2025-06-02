@@ -14,7 +14,7 @@ export default function Therapists() {
   });
 
   return (
-    <section id="therapists" className="py-20 bg-white">
+    <section id="therapists" className="py-20 bg-gray-900">
       <div className="container mx-auto px-4">
         <div 
           ref={titleRef}
@@ -25,7 +25,7 @@ export default function Therapists() {
         >
           <h2 className="section-title">Meet Our Therapists</h2>
           <div className="section-divider"></div>
-          <p className="text-neutral-dark opacity-80">
+          <p className="text-gray-300">
             Our highly skilled and certified massage therapists are dedicated to providing personalized care for your wellness journey.
           </p>
         </div>
@@ -71,7 +71,7 @@ function TherapistCard({ therapist, index }: TherapistCardProps) {
   return (
     <div 
       ref={cardRef}
-      className={`bg-neutral-light rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow ${
+      className={`bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: animationDelay }}
@@ -83,9 +83,9 @@ function TherapistCard({ therapist, index }: TherapistCardProps) {
         className="w-full h-64 object-cover"
       />
       <div className="p-6">
-        <h3 className="text-xl font-serif text-neutral-dark mb-2">{therapist.name}</h3>
-        <p className="text-primary font-medium mb-3">{therapist.title}</p>
-        <p className="text-neutral-dark opacity-80 text-sm mb-4">
+        <h3 className="text-xl font-serif text-gray-100 mb-2">{therapist.name}</h3>
+        <p className="text-teal-400 font-medium mb-3">{therapist.title}</p>
+        <p className="text-gray-300 text-sm mb-4">
           {therapist.bio}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -93,7 +93,7 @@ function TherapistCard({ therapist, index }: TherapistCardProps) {
             <Badge 
               key={i} 
               variant="secondary" 
-              className="bg-secondary bg-opacity-20 text-secondary-dark hover:bg-secondary-light hover:text-secondary-dark"
+              className="bg-teal-400 bg-opacity-20 text-teal-400 hover:bg-teal-400 hover:bg-opacity-30"
             >
               {specialty}
             </Badge>

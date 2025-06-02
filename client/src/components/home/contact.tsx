@@ -46,7 +46,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-gray-800">
       <div className="container mx-auto px-4">
         <div 
           ref={titleRef}
@@ -57,7 +57,7 @@ export default function Contact() {
         >
           <h2 className="section-title">Visit Our Spa</h2>
           <div className="section-divider"></div>
-          <p className="text-neutral-dark opacity-80">
+          <p className="text-gray-300">
             We're conveniently located in the heart of the city. Stop by or contact us for more information.
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div 
             ref={leftCardRef}
-            className={`bg-neutral-light rounded-lg overflow-hidden shadow-md transition-all duration-1000 ${
+            className={`bg-gray-700 rounded-lg overflow-hidden shadow-md transition-all duration-1000 ${
               isLeftCardVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             data-animate
@@ -84,20 +84,20 @@ export default function Contact() {
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-serif text-neutral-dark mb-4">Zen Spa Location</h3>
+              <h3 className="text-xl font-serif text-gray-100 mb-4">Zen Spa Location</h3>
               <div className="space-y-3">
                 <div className="flex items-start">
-                  <MapPin className="text-primary mr-3 mt-1 h-5 w-5 flex-shrink-0" />
+                  <MapPin className="text-teal-400 mr-3 mt-1 h-5 w-5 flex-shrink-0" />
                   <div>
-                    <p className="text-neutral-dark">1234 Serenity Avenue</p>
-                    <p className="text-neutral-dark">San Francisco, CA 94107</p>
+                    <p className="text-gray-300">1234 Serenity Avenue</p>
+                    <p className="text-gray-300">San Francisco, CA 94107</p>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <Clock className="text-primary mr-3 h-5 w-5 flex-shrink-0" />
+                  <Clock className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
                   <div>
-                    <p className="text-neutral-dark">Monday - Friday: 9am - 8pm</p>
-                    <p className="text-neutral-dark">Saturday - Sunday: 10am - 6pm</p>
+                    <p className="text-gray-300">Monday - Friday: 9am - 8pm</p>
+                    <p className="text-gray-300">Saturday - Sunday: 10am - 6pm</p>
                   </div>
                 </div>
               </div>
@@ -106,33 +106,33 @@ export default function Contact() {
           
           <div 
             ref={rightCardRef}
-            className={`bg-neutral-light rounded-lg overflow-hidden shadow-md transition-all duration-1000 ${
+            className={`bg-gray-700 rounded-lg overflow-hidden shadow-md transition-all duration-1000 ${
               isRightCardVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             data-animate
           >
             <div className="p-6">
-              <h3 className="text-xl font-serif text-neutral-dark mb-4">Contact Information</h3>
+              <h3 className="text-xl font-serif text-gray-100 mb-4">Contact Information</h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
-                  <Phone className="text-primary mr-3 h-5 w-5 flex-shrink-0" />
-                  <p className="text-neutral-dark">(555) 123-4567</p>
+                  <Phone className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
+                  <p className="text-gray-300">(555) 123-4567</p>
                 </div>
                 <div className="flex items-center">
-                  <Mail className="text-primary mr-3 h-5 w-5 flex-shrink-0" />
-                  <p className="text-neutral-dark">info@zenspa.com</p>
+                  <Mail className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
+                  <p className="text-gray-300">info@zenspa.com</p>
                 </div>
                 <div className="flex items-center">
-                  <Instagram className="text-primary mr-3 h-5 w-5 flex-shrink-0" />
-                  <p className="text-neutral-dark">@zenspa</p>
+                  <Instagram className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
+                  <p className="text-gray-300">@zenspa</p>
                 </div>
                 <div className="flex items-center">
-                  <Facebook className="text-primary mr-3 h-5 w-5 flex-shrink-0" />
-                  <p className="text-neutral-dark">/zenspaofficial</p>
+                  <Facebook className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
+                  <p className="text-gray-300">/zenspaofficial</p>
                 </div>
               </div>
               
-              <h3 className="text-xl font-serif text-neutral-dark mb-4">Send us a Message</h3>
+              <h3 className="text-xl font-serif text-gray-100 mb-4">Send us a Message</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField

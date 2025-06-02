@@ -14,7 +14,7 @@ export default function Services() {
   });
 
   return (
-    <section id="services" className="py-20 bg-white">
+    <section id="services" className="py-20 bg-gray-800">
       <div className="container mx-auto px-4">
         <div 
           ref={titleRef}
@@ -25,7 +25,7 @@ export default function Services() {
         >
           <h2 className="section-title">Our Massage Services</h2>
           <div className="section-divider"></div>
-          <p className="text-neutral-dark opacity-80">
+          <p className="text-gray-300">
             Discover our range of therapeutic treatments designed to address your unique needs and preferences.
           </p>
         </div>
@@ -83,7 +83,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <div 
       ref={cardRef}
-      className={`bg-neutral-light rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow ${
+      className={`bg-gray-700 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: animationDelay }}
@@ -96,19 +96,19 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       />
       <div className="p-6">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-serif text-neutral-dark">{service.name}</h3>
-          <span className="text-primary font-medium">${service.price}</span>
+          <h3 className="text-xl font-serif text-gray-100">{service.name}</h3>
+          <span className="text-teal-400 font-medium">${service.price}</span>
         </div>
-        <p className="text-neutral-dark opacity-80 text-sm mb-4">
+        <p className="text-gray-300 text-sm mb-4">
           {service.description}
         </p>
         <div className="flex justify-between items-center">
-          <span className="text-sm text-neutral-dark opacity-70">
+          <span className="text-sm text-gray-400">
             {service.duration} minutes
           </span>
           <a 
             href="#booking" 
-            className="text-primary hover:text-primary-dark font-medium flex items-center"
+            className="text-teal-400 hover:text-teal-300 font-medium flex items-center"
           >
             Book Now <ArrowRight className="ml-1 h-4 w-4" />
           </a>

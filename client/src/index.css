@@ -57,11 +57,11 @@
   }
   
   body {
-    @apply bg-gray-50 text-gray-800 font-sans;
+    @apply bg-gray-900 text-gray-100 font-sans;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-serif text-gray-100;
   }
 }
 
@@ -79,11 +79,11 @@
   }
   
   .section-title {
-    @apply text-3xl md:text-4xl font-serif text-gray-800;
+    @apply text-3xl md:text-4xl font-serif text-gray-100;
   }
   
   .section-divider {
-    @apply w-20 h-1 bg-teal-600 mx-auto my-6;
+    @apply w-20 h-1 bg-teal-400 mx-auto my-6;
   }
   
   .booking-calendar .date-cell {

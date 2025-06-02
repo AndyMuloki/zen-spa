@@ -47,7 +47,7 @@ export default function Testimonials() {
   const isSliderVisible = useIntersectionObserver(sliderRef, { threshold: 0.1 });
 
   return (
-    <section id="testimonials" className="py-20 bg-white relative overflow-hidden">
+    <section id="testimonials" className="py-20 bg-gray-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&h=1200')" }}></div>
       
       <div className="container mx-auto px-4 relative">
@@ -60,7 +60,7 @@ export default function Testimonials() {
         >
           <h2 className="section-title">Client Experiences</h2>
           <div className="section-divider"></div>
-          <p className="text-neutral-dark opacity-80">
+          <p className="text-gray-300">
             Read what our clients have to say about their experiences at Zen Spa.
           </p>
         </div>
@@ -118,7 +118,7 @@ export default function Testimonials() {
                       <button 
                         key={index} 
                         className={`w-3 h-3 rounded-full transition-colors ${
-                          index === currentIndex ? 'bg-primary' : 'bg-neutral opacity-30'
+                          index === currentIndex ? 'bg-teal-400' : 'bg-gray-600 opacity-30'
                         }`}
                         onClick={() => setCurrentIndex(index)}
                         aria-label={`Go to testimonial ${index + 1}`}
@@ -151,11 +151,11 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
     const hasHalfStar = rating % 1 !== 0;
     
     for (let i = 0; i < fullStars; i++) {
-      stars.push(<Star key={`star-${i}`} className="fill-primary text-primary" />);
+      stars.push(<Star key={`star-${i}`} className="fill-teal-400 text-teal-400" />);
     }
     
     if (hasHalfStar) {
-      stars.push(<StarHalf key="half-star" className="fill-primary text-primary" />);
+      stars.push(<StarHalf key="half-star" className="fill-teal-400 text-teal-400" />);
     }
     
     return stars;
@@ -163,13 +163,13 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
   
   return (
     <div className="w-full min-w-full px-4">
-      <div className="bg-neutral-light p-8 rounded-lg shadow-md">
+      <div className="bg-gray-800 p-8 rounded-lg shadow-md">
         <div className="flex items-center mb-6">
-          <div className="flex text-primary">
+          <div className="flex text-teal-400">
             {renderRatingStars(testimonial.rating)}
           </div>
         </div>
-        <p className="text-neutral-dark italic mb-6">{testimonial.testimonial}</p>
+        <p className="text-gray-300 italic mb-6">{testimonial.testimonial}</p>
         <div className="flex items-center">
           <div className="mr-4">
             <img 
@@ -179,8 +179,8 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
             />
           </div>
           <div>
-            <h4 className="font-medium text-neutral-dark">{testimonial.name}</h4>
-            <p className="text-neutral-dark opacity-70 text-sm">{testimonial.title}</p>
+            <h4 className="font-medium text-gray-100">{testimonial.name}</h4>
+            <p className="text-gray-400 text-sm">{testimonial.title}</p>
           </div>
         </div>
       </div>
