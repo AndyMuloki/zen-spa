@@ -259,7 +259,7 @@ export default function BookingForm() {
                         name="serviceId"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="block text-gray-200 font-medium mb-2">Select Service</FormLabel>
+                            <FormLabel className="block text-gray-200 font-medium mb-2">Select Services</FormLabel>
                             <Select
                               value={field.value?.toString()}
                               onValueChange={(value) => field.onChange(parseInt(value))}
