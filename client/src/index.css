@@ -109,4 +109,39 @@
   [data-animate].animated {
     @apply opacity-100 translate-y-0;
   }
+
+  /* Dark theme select field fixes */
+  [data-radix-select-trigger] {
+    @apply text-gray-100 bg-gray-700 border-gray-600 !important;
+  }
+  
+  [data-radix-select-content] {
+    @apply bg-gray-700 border-gray-600 !important;
+  }
+  
+  [data-radix-select-item] {
+    @apply text-gray-100 !important;
+  }
+  
+  [data-radix-select-item]:focus,
+  [data-radix-select-item][data-highlighted] {
+    @apply bg-gray-600 text-gray-100 !important;
+  }
+  
+  [data-radix-select-value] {
+    @apply text-gray-100 !important;
+  }
+  
+  [data-placeholder] {
+    @apply text-gray-400 !important;
+  }
+
+  /* Additional input field dark theme fixes */
+  input, textarea, select {
+    @apply text-gray-100 bg-gray-700 border-gray-600 !important;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    @apply text-gray-400 !important;
+  }
 }
