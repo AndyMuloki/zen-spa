@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, addDays, isBefore, startOfToday, getDay, addMonths, startOfMonth, getMonth, getYear, parse } from 'date-fns';
 
@@ -13,7 +13,7 @@ export default function DatePicker({
   onDateChange, 
   disablePastDates = true 
 }: DatePickerProps) {
-  const today = startOfToday();
+  const today = useMemo(() => startOfToday(), []);
   const [currentMonth, setCurrentMonth] = useState<Date>(selectedDate || today);
   const [calendarDays, setCalendarDays] = useState<{ date: Date; isCurrentMonth: boolean; isDisabled: boolean }[]>([]);
   
@@ -71,31 +71,31 @@ export default function DatePicker({
   };
   
   return (
-    <div className="booking-calendar bg-white rounded-md overflow-hidden">
-      <div className="flex justify-between items-center py-2 px-4 bg-primary bg-opacity-10">
+    <div className="booking-calendar bg-gray-700 rounded-md overflow-hidden">
+      <div className="flex justify-between items-center py-2 px-4 bg-teal-500 bg-opacity-20">
         <button 
           onClick={previousMonth}
           disabled={disablePastDates && getMonth(currentMonth) === getMonth(today) && getYear(currentMonth) === getYear(today)}
-          className="p-1 rounded-full hover:bg-primary hover:bg-opacity-20 disabled:opacity-30 disabled:cursor-not-allowed"
+          className="p-1 rounded-full hover:bg-teal-400 hover:bg-opacity-20 disabled:opacity-30 disabled:cursor-not-allowed"
           aria-label="Previous month"
         >
-          <ChevronLeft className="h-5 w-5 text-neutral-dark" />
+          <ChevronLeft className="h-5 w-5 text-gray-100" />
         </button>
-        <h3 className="font-medium text-neutral-dark">
+        <h3 className="font-medium text-gray-100">
           {format(currentMonth, 'MMMM yyyy')}
         </h3>
         <button 
           onClick={nextMonth}
-          className="p-1 rounded-full hover:bg-primary hover:bg-opacity-20"
+          className="p-1 rounded-full hover:bg-teal-400 hover:bg-opacity-20"
           aria-label="Next month"
         >
-          <ChevronRight className="h-5 w-5 text-neutral-dark" />
+          <ChevronRight className="h-5 w-5 text-gray-100" />
         </button>
       </div>
       
       <div className="grid grid-cols-7 gap-1 text-center">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-          <div key={day} className="text-neutral-dark opacity-70 text-xs font-medium py-2">
+          <div key={day} className="text-gray-300 text-xs font-medium py-2">
             {day}
           </div>
         ))}
@@ -104,10 +104,10 @@ export default function DatePicker({
           <div 
             key={index}
             className={`
-              date-cell p-2 text-sm cursor-pointer
-              ${day.isCurrentMonth ? '' : 'text-neutral-dark opacity-40'}
-              ${day.isDisabled ? 'unavailable' : ''}
-              ${selectedDate && format(day.date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd') ? 'selected' : ''}
+              date-cell p-2 text-sm cursor-pointer text-gray-200
+              ${day.isCurrentMonth ? '' : 'opacity-40'}
+              ${day.isDisabled ? 'unavailable opacity-30 cursor-not-allowed' : 'hover:bg-teal-500 hover:bg-opacity-20'}
+              ${selectedDate && format(day.date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd') ? 'bg-teal-500 text-white' : ''}
             `}
             onClick={() => handleDateClick(day.date, day.isDisabled)}
           >
