@@ -380,7 +380,7 @@ export default function BookingForm() {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="block text-neutral-dark font-medium mb-2">Select Date</FormLabel>
+                        <FormLabel className="block text-gray-200 font-medium mb-2">Select Date</FormLabel>
                         <FormControl>
                           <DatePicker
                             selectedDate={selectedDate}
@@ -398,7 +398,7 @@ export default function BookingForm() {
                     name="time"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="block text-neutral-dark font-medium mb-2">Select Time</FormLabel>
+                        <FormLabel className="block text-gray-200 font-medium mb-2">Select Time</FormLabel>
                         <FormControl>
                           <TimePicker
                             availableTimes={availableTimes}
@@ -419,7 +419,7 @@ export default function BookingForm() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="block text-neutral-dark font-medium mb-2">First Name</FormLabel>
+                          <FormLabel className="block text-gray-200 font-medium mb-2">First Name</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Enter your first name"
@@ -437,7 +437,7 @@ export default function BookingForm() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="block text-neutral-dark font-medium mb-2">Last Name</FormLabel>
+                          <FormLabel className="block text-gray-200 font-medium mb-2">Last Name</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Enter your last name"
@@ -457,7 +457,7 @@ export default function BookingForm() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="block text-neutral-dark font-medium mb-2">Email</FormLabel>
+                          <FormLabel className="block text-gray-200 font-medium mb-2">Email</FormLabel>
                           <FormControl>
                             <Input
                               type="email"
@@ -476,7 +476,7 @@ export default function BookingForm() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="block text-neutral-dark font-medium mb-2">Phone</FormLabel>
+                          <FormLabel className="block text-gray-200 font-medium mb-2">Phone</FormLabel>
                           <FormControl>
                             <Input
                               type="tel"
@@ -497,7 +497,7 @@ export default function BookingForm() {
                     name="notes"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="block text-neutral-dark font-medium mb-2">Special Requests</FormLabel>
+                        <FormLabel className="block text-gray-200 font-medium mb-2">Special Requests</FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Any special requests or health concerns"
@@ -514,7 +514,7 @@ export default function BookingForm() {
                   {/* Submit Button */}
                   <Button
                     type="submit"
-                    className="w-full bg-primary hover:bg-primary-dark text-white font-medium py-3 rounded-md transition-colors"
+                    className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 rounded-md transition-colors"
                     disabled={bookingMutation.isPending}
                   >
                     {bookingMutation.isPending ? "Processing..." : "Confirm Booking"}
