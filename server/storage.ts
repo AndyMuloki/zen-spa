@@ -283,7 +283,7 @@ export class MemStorage implements IStorage {
       name: "Marcus Williams",
       title: "Therapeutic Specialist",
       bio: "Marcus focuses on therapeutic techniques that target chronic pain conditions and help improve mobility and function.",
-      image: "https://images.unsplash.com/photo-1573879541250-58ae8b322b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
       specialties: ["Deep Tissue", "Trigger Point", "Therapeutic"]
     });
     
@@ -291,7 +291,7 @@ export class MemStorage implements IStorage {
       name: "Olivia Bennett",
       title: "Luxury Experience Specialist",
       bio: "Olivia creates premium massage experiences combining hot stone therapy with aromatherapy and advanced techniques.",
-      image: "https://cdn.pixabay.com/photo/2016/11/18/14/15/woman-1834827_1280.jpg",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
       specialties: ["Hot Stone", "Aromatherapy", "Swedish"]
     });
     
@@ -299,7 +299,7 @@ export class MemStorage implements IStorage {
       name: "James Rodriguez",
       title: "Restorative Massage Specialist",
       bio: "James specializes in helping clients recover from injuries and surgeries through gentle yet effective massage techniques.",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
+      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
       specialties: ["Therapeutic", "Gentle Deep Tissue", "Rehabilitation"]
     });
     
@@ -354,7 +354,7 @@ export class MemStorage implements IStorage {
       title: "Monthly Member",
       testimonial: "I've been to many spas, but Zen Spa offers something truly special. Emma's deep tissue massage was exactly what I needed for my chronic back pain. The atmosphere is so peaceful, and the staff is incredibly attentive. I've already booked my next appointment!",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+      image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
     });
     
     this.createTestimonial({
@@ -362,7 +362,7 @@ export class MemStorage implements IStorage {
       title: "Package Client",
       testimonial: "The Premium Package was the perfect gift for our anniversary. Daniel's sports massage techniques helped with my shoulder injury from tennis, and my wife loved the hot stone treatment. The private relaxation room was a wonderful touch. We'll definitely be returning!",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671d66?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
     });
     
     this.createTestimonial({
@@ -370,7 +370,7 @@ export class MemStorage implements IStorage {
       title: "Regular Client",
       testimonial: "As someone with a high-stress job, my monthly massage at Zen Spa has become essential for my wellbeing. Sophia's aromatherapy massage is transformative - I feel like a new person afterward. The online booking system makes it so easy to schedule appointments around my busy calendar.",
       rating: 4.5,
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
+      image: "https://images.unsplash.com/photo-1494790108755-2616c04707e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
     });
   }
 }
