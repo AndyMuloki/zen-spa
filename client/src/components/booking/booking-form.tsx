@@ -265,7 +265,7 @@ export default function BookingForm() {
                               onValueChange={(value) => field.onChange(parseInt(value))}
                             >
                               <FormControl>
-                                <SelectTrigger className="w-full p-3 border border-neutral rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                <SelectTrigger className="w-full p-3 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
                                   <SelectValue placeholder="Choose a service" />
                                 </SelectTrigger>
                               </FormControl>
@@ -303,7 +303,7 @@ export default function BookingForm() {
                               onValueChange={(value) => field.onChange(parseInt(value))}
                             >
                               <FormControl>
-                                <SelectTrigger className="w-full p-3 border border-neutral rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                                <SelectTrigger className="w-full p-3 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
                                   <SelectValue placeholder="Choose a package" />
                                 </SelectTrigger>
                               </FormControl>
@@ -344,7 +344,7 @@ export default function BookingForm() {
                           onValueChange={(value) => field.onChange(parseInt(value))}
                         >
                           <FormControl>
-                            <SelectTrigger className="w-full p-3 border border-neutral rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            <SelectTrigger className="w-full p-3 border border-gray-600 bg-gray-700 text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
                               <SelectValue placeholder="Choose a therapist" />
                             </SelectTrigger>
                           </FormControl>

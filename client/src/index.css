@@ -112,36 +112,53 @@
 
   /* Dark theme select field fixes */
   [data-radix-select-trigger] {
-    @apply text-gray-100 bg-gray-700 border-gray-600 !important;
+    background-color: rgb(55 65 81) !important;
+    color: rgb(243 244 246) !important;
+    border-color: rgb(75 85 99) !important;
   }
   
   [data-radix-select-content] {
-    @apply bg-gray-700 border-gray-600 !important;
+    background-color: rgb(55 65 81) !important;
+    border-color: rgb(75 85 99) !important;
   }
   
   [data-radix-select-item] {
-    @apply text-gray-100 !important;
+    color: rgb(243 244 246) !important;
   }
   
   [data-radix-select-item]:focus,
   [data-radix-select-item][data-highlighted] {
-    @apply bg-gray-600 text-gray-100 !important;
+    background-color: rgb(75 85 99) !important;
+    color: rgb(243 244 246) !important;
   }
   
   [data-radix-select-value] {
-    @apply text-gray-100 !important;
+    color: rgb(243 244 246) !important;
   }
   
   [data-placeholder] {
-    @apply text-gray-400 !important;
+    color: rgb(156 163 175) !important;
+  }
+
+  /* SelectTrigger specific styling */
+  button[role="combobox"] {
+    background-color: rgb(55 65 81) !important;
+    color: rgb(243 244 246) !important;
+    border-color: rgb(75 85 99) !important;
+  }
+
+  button[role="combobox"] span {
+    color: rgb(243 244 246) !important;
   }
 
   /* Additional input field dark theme fixes */
   input, textarea, select {
-    @apply text-gray-100 bg-gray-700 border-gray-600 !important;
+    background-color: rgb(55 65 81) !important;
+    color: rgb(243 244 246) !important;
+    border-color: rgb(75 85 99) !important;
   }
   
   input::placeholder, textarea::placeholder {
-    @apply text-gray-400 !important;
+    color: rgb(156 163 175) !important;
   }
 }
