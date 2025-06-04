@@ -211,7 +211,7 @@ export class MemStorage implements IStorage {
       description: "A gentle, relaxing massage that uses long strokes, kneading, and circular movements to ease tension and promote relaxation.",
       price: 85,
       duration: 60,
-      image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
+      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
     });
     
     this.createService({
@@ -219,7 +219,7 @@ export class MemStorage implements IStorage {
       description: "Targets the deeper layers of muscles and connective tissue to release chronic tension and help with muscle injuries.",
       price: 95,
       duration: 60,
-      image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
+      image: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
     });
     
     this.createService({
@@ -227,7 +227,7 @@ export class MemStorage implements IStorage {
       description: "Smooth, heated stones are placed on key points of the body combined with massage to promote deep relaxation and ease muscle tension.",
       price: 110,
       duration: 75,
-      image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
+      image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
     });
     
     this.createService({
@@ -235,7 +235,7 @@ export class MemStorage implements IStorage {
       description: "Combines the power of essential oils with massage techniques to promote healing, reduce stress and enhance wellbeing.",
       price: 100,
       duration: 60,
-      image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
+      image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
     });
     
     this.createService({
@@ -243,7 +243,7 @@ export class MemStorage implements IStorage {
       description: "Designed to assist in correcting problems and imbalances in soft tissue that are caused by repetitive physical activity.",
       price: 95,
       duration: 60,
-      image: "https://cdn.pixabay.com/photo/2019/11/11/10/26/massage-4618127_1280.jpg"
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
     });
     
     this.createService({
@@ -251,7 +251,7 @@ export class MemStorage implements IStorage {
       description: "Tailored for expectant mothers, this gentle massage helps alleviate pregnancy discomforts and promotes relaxation.",
       price: 90,
       duration: 60,
-      image: "https://images.unsplash.com/photo-1591343395082-e120087004b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
+      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
     });
     
     // Therapists
@@ -259,7 +259,7 @@ export class MemStorage implements IStorage {
       name: "Emma Johnson",
       title: "Senior Massage Therapist",
       bio: "Emma specializes in Swedish and Deep Tissue massage with over 8 years of experience. Her approach focuses on stress reduction and pain relief.",
-      image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
+      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
       specialties: ["Swedish", "Deep Tissue", "Hot Stone"]
     });
     
@@ -267,7 +267,7 @@ export class MemStorage implements IStorage {
       name: "Daniel Chen",
       title: "Sports Massage Specialist",
       bio: "Daniel has worked with professional athletes and specializes in sports recovery, injury prevention, and performance enhancement techniques.",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
       specialties: ["Sports", "Deep Tissue", "Myofascial"]
     });
     
@@ -275,7 +275,7 @@ export class MemStorage implements IStorage {
       name: "Sophia Patel",
       title: "Holistic Wellness Expert",
       bio: "Sophia combines aromatherapy with traditional massage techniques to create deeply relaxing and healing experiences.",
-      image: "https://images.unsplash.com/photo-1517344884509-a0c97ec11bcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
+      image: "https://images.unsplash.com/photo-1494790108755-2616c04707e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
       specialties: ["Aromatherapy", "Swedish", "Prenatal"]
     });
     
