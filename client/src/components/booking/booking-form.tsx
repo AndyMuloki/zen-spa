@@ -195,7 +195,7 @@ export default function BookingForm() {
   };
 
   return (
-    <section id="booking" className="py-20 bg-primary bg-opacity-10">
+    <section id="booking" className="py-20 bg-gray-900">
       <div className="container mx-auto px-4">
         <div 
           ref={titleRef}
@@ -206,14 +206,14 @@ export default function BookingForm() {
         >
           <h2 className="section-title">Book Your Appointment</h2>
           <div className="section-divider"></div>
-          <p className="text-neutral-dark opacity-80">
+          <p className="text-gray-300 opacity-80">
             Schedule your massage session with our expert therapists and begin your wellness journey.
           </p>
         </div>
         
         <div 
           ref={formRef}
-          className={`max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-1000 ${
+          className={`max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
           data-animate
@@ -229,7 +229,7 @@ export default function BookingForm() {
             </div>
             
             {/* Booking Form */}
-            <div className="md:col-span-3 p-8">
+            <div className="md:col-span-3 p-8 bg-gray-800 text-gray-100">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   {/* Service or Package Selection */}
@@ -238,7 +238,7 @@ export default function BookingForm() {
                       <Button
                         type="button"
                         variant={selectedType === "service" ? "default" : "outline"}
-                        className={selectedType === "service" ? "bg-primary text-white" : ""}
+                        className={selectedType === "service" ? "bg-teal-600 text-white hover:bg-teal-700" : "border-gray-600 text-gray-300 hover:bg-gray-700"}
                         onClick={() => setSelectedType("service")}
                       >
                         Service
@@ -246,7 +246,7 @@ export default function BookingForm() {
                       <Button
                         type="button"
                         variant={selectedType === "package" ? "default" : "outline"}
-                        className={selectedType === "package" ? "bg-primary text-white" : ""}
+                        className={selectedType === "package" ? "bg-teal-600 text-white hover:bg-teal-700" : "border-gray-600 text-gray-300 hover:bg-gray-700"}
                         onClick={() => setSelectedType("package")}
                       >
                         Package
@@ -259,7 +259,7 @@ export default function BookingForm() {
                         name="serviceId"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="block text-neutral-dark font-medium mb-2">Select Service</FormLabel>
+                            <FormLabel className="block text-gray-200 font-medium mb-2">Select Service</FormLabel>
                             <Select
                               value={field.value?.toString()}
                               onValueChange={(value) => field.onChange(parseInt(value))}
@@ -297,7 +297,7 @@ export default function BookingForm() {
                         name="packageId"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="block text-neutral-dark font-medium mb-2">Select Package</FormLabel>
+                            <FormLabel className="block text-gray-200 font-medium mb-2">Select Package</FormLabel>
                             <Select
                               value={field.value?.toString()}
                               onValueChange={(value) => field.onChange(parseInt(value))}
@@ -338,7 +338,7 @@ export default function BookingForm() {
                     name="therapistId"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="block text-neutral-dark font-medium mb-2">Select Therapist</FormLabel>
+                        <FormLabel className="block text-gray-200 font-medium mb-2">Select Therapist</FormLabel>
                         <Select
                           value={field.value?.toString()}
                           onValueChange={(value) => field.onChange(parseInt(value))}
