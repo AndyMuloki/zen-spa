@@ -51,12 +51,12 @@ export default function TimePicker({
             type="button"
             disabled={!isAvailable}
             className={`
-              p-2 border rounded-md text-neutral-dark transition-colors
+              p-2 border rounded-md transition-colors
               ${isSelected 
-                ? 'border-primary bg-primary-light text-white' 
+                ? 'border-teal-500 bg-teal-600 text-white' 
                 : isAvailable 
-                  ? 'border-neutral hover:bg-primary hover:text-white hover:border-primary' 
-                  : 'opacity-50 cursor-not-allowed border-neutral'
+                  ? 'border-neutral hover:bg-primary hover:text-white hover:border-primary text-white' 
+                  : 'opacity-50 cursor-not-allowed border-neutral text-gray-400'
               }
             `}
             onClick={() => isAvailable && onTimeSelect(time)}
