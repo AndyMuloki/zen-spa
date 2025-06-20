@@ -3,6 +3,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
+import adminRoutes from "./admin";
 
 const app = express();
 app.use(express.json());
@@ -54,6 +55,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use("/api/admin", adminRoutes);
 
 (async () => {
   const server = await registerRoutes(app);

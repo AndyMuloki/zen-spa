@@ -30,6 +30,8 @@ export interface IStorage {
   getAllTherapists(): Promise<Therapist[]>;
   getTherapist(id: number): Promise<Therapist | undefined>;
   createTherapist(therapist: InsertTherapist): Promise<Therapist>;
+  updateTherapist(id: number, therapist: Partial<InsertTherapist>): Promise<Therapist>;
+  deleteTherapist(id: number): Promise<void>;
   
   // Package methods
   getAllPackages(): Promise<Package[]>;
@@ -96,6 +98,15 @@ export class DbStorage implements IStorage {
   async createTherapist(therapist: InsertTherapist): Promise<Therapist> {
     const result = await db.insert(therapists).values(therapist).returning();
     return result[0];
+  }
+
+  async updateTherapist(id: number, therapist: Partial<InsertTherapist>): Promise<Therapist> {
+    const result = await db.update(therapists).set(therapist).where(eq(therapists.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteTherapist(id: number): Promise<void> {
+    await db.delete(therapists).where(eq(therapists.id, id));
   }
 
   // Package methods
