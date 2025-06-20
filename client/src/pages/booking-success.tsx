@@ -3,8 +3,11 @@ import { Link } from "wouter";
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 
 export default function BookingSuccess() {
+  const { toast } = useToast();
+
   useEffect(() => {
     // Set page title and meta description
     document.title = "Booking Confirmed - Zen Spa";
@@ -18,7 +21,20 @@ export default function BookingSuccess() {
       newMetaDescription.setAttribute('content', 'Your spa treatment has been successfully booked at Zen Spa. We look forward to helping you relax and rejuvenate.');
       document.head.appendChild(newMetaDescription);
     }
-  }, []);
+
+    // Fetch and show flash message from session
+    fetch("/api/flash")
+      .then(res => res.json())
+      .then(data => {
+        if (data.flash) {
+          toast({
+            title: data.flash.title,
+            description: data.flash.description,
+            variant: data.flash.type,
+          });
+        }
+      });
+  }, [toast]);
   
   return (
     <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center justify-center bg-neutral-light">

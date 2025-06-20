@@ -4,6 +4,18 @@ import { storage } from "./storage";
 import { insertBookingSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
+import type session from "express-session";
+
+// Extend express-session to include flash property
+declare module "express-session" {
+  interface SessionData {
+    flash?: {
+      type: string;
+      title: string;
+      description: string;
+    };
+  }
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // prefix all routes with /api
@@ -57,6 +69,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertBookingSchema.parse(req.body);
       const booking = await storage.createBooking(validatedData);
+      // Set session-based flash message
+      req.session.flash = {
+        type: "success",
+        title: "Booking Successful",
+        description: "Your appointment has been booked!"
+      };
       res.status(201).json(booking);
     } catch (error) {
       console.error("Error creating booking:", error);
@@ -71,6 +89,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.status(500).json({ message: "Failed to create booking" });
     }
+  });
+
+  // Flash message endpoint
+  app.get("/api/flash", (req, res) => {
+    const flash = req.session.flash;
+    delete req.session.flash;
+    res.json({ flash });
   });
 
   // Get available time slots for a specific date, service/package, and therapist

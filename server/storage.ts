@@ -275,7 +275,7 @@ export class MemStorage implements IStorage {
       name: "Sophia Patel",
       title: "Holistic Wellness Expert",
       bio: "Sophia combines aromatherapy with traditional massage techniques to create deeply relaxing and healing experiences.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c04707e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
+      image: "https://www.pexels.com/photo/photo-of-person-wearing-protective-wear-while-holding-globe-4167541/",
       specialties: ["Aromatherapy", "Swedish", "Prenatal"]
     });
     
