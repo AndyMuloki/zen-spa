@@ -36,7 +36,9 @@ export default function TimePicker({
   // Some standard time slots for demonstration purposes
   const timeSlots = [
     "9:00 AM", "10:30 AM", "12:00 PM", "1:30 PM", 
-    "3:00 PM", "4:30 PM", "6:00 PM", "7:30 PM"
+    "3:00 PM", "4:30 PM", "6:00 PM", "7:30 PM", 
+    "9:00 PM", "10:30 PM", "12:00 AM", "1:30 AM",
+    "Other"
   ];
   
   return (
@@ -55,7 +57,7 @@ export default function TimePicker({
               ${isSelected 
                 ? 'border-teal-500 bg-teal-600 text-white' 
                 : isAvailable 
-                  ? 'border-neutral hover:bg-primary hover:text-white hover:border-primary text-white' 
+                  ? 'border-neutral hover:bg-green-400 hover:text-white hover:border-green-400 text-white' 
                   : 'opacity-50 cursor-not-allowed border-neutral text-gray-400'
               }
             `}

@@ -58,6 +58,11 @@ const bookingFormSchema = z.object({
 
 type BookingFormValues = z.infer<typeof bookingFormSchema>;
 
+// Add types for API data
+type Service = { id: number; name: string; price: number };
+type Package = { id: number; name: string; price: number };
+type Therapist = { id: number; name: string; specialties: string[] };
+
 export default function BookingForm() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined);
@@ -90,15 +95,15 @@ export default function BookingForm() {
     },
   });
   
-  const { data: services, isLoading: isServicesLoading } = useQuery({
+  const { data: services = [], isLoading: isServicesLoading } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
   
-  const { data: packages, isLoading: isPackagesLoading } = useQuery({
+  const { data: packages = [], isLoading: isPackagesLoading } = useQuery<Package[]>({
     queryKey: ["/api/packages"],
   });
   
-  const { data: therapists, isLoading: isTherapistsLoading } = useQuery({
+  const { data: therapists = [], isLoading: isTherapistsLoading } = useQuery<Therapist[]>({
     queryKey: ["/api/therapists"],
   });
   
@@ -194,6 +199,14 @@ export default function BookingForm() {
     bookingMutation.mutate(submitData);
   };
 
+  // Some standard time slots for demonstration purposes
+  const allTimes = [
+    "9:00 AM", "10:30 AM", "12:00 PM", "1:30 PM", 
+    "3:00 PM", "4:30 PM", "6:00 PM", "7:30 PM", 
+    "9:00 PM", "10:30 PM", "12:00 AM", "1:30 AM",
+    "Other"
+  ];
+
   return (
     <section id="booking" className="py-20 bg-gray-900">
       <div className="container mx-auto px-4">
@@ -274,8 +287,8 @@ export default function BookingForm() {
                                   <SelectItem value="loading" disabled>
                                     Loading services...
                                   </SelectItem>
-                                ) : services?.length ? (
-                                  services.map((service) => (
+                                ) : services.length ? (
+                                  services.map((service: Service) => (
                                     <SelectItem key={service.id} value={service.id.toString()}>
                                       {service.name} (${service.price})
                                     </SelectItem>
@@ -312,8 +325,8 @@ export default function BookingForm() {
                                   <SelectItem value="loading" disabled>
                                     Loading packages...
                                   </SelectItem>
-                                ) : packages?.length ? (
-                                  packages.map((pkg) => (
+                                ) : packages.length ? (
+                                  packages.map((pkg: Package) => (
                                     <SelectItem key={pkg.id} value={pkg.id.toString()}>
                                       {pkg.name} (${pkg.price})
                                     </SelectItem>
@@ -353,9 +366,9 @@ export default function BookingForm() {
                               <SelectItem value="loading" disabled>
                                 Loading therapists...
                               </SelectItem>
-                            ) : therapists?.length ? (
+                            ) : therapists.length ? (
                               <>
-                                {therapists.map((therapist) => (
+                                {therapists.map((therapist: Therapist) => (
                                   <SelectItem key={therapist.id} value={therapist.id.toString()}>
                                     {therapist.name} - {therapist.specialties.join(", ")}
                                   </SelectItem>
@@ -401,7 +414,7 @@ export default function BookingForm() {
                         <FormLabel className="block text-gray-200 font-medium mb-2">Select Time</FormLabel>
                         <FormControl>
                           <TimePicker
-                            availableTimes={availableTimes}
+                            availableTimes={allTimes}
                             selectedTime={selectedTime}
                             onTimeSelect={setSelectedTime}
                             isLoading={!!(selectedDate && therapistId && (serviceId || packageId) && availableTimes.length === 0)}
