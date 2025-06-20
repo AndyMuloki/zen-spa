@@ -45,8 +45,25 @@ export default function AdminPage() {
   useEffect(() => {
     if (isAdmin) {
       fetch('/api/admin/therapists')
-        .then((res) => res.json())
-        .then(setTherapists);
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error('Failed to fetch therapists');
+          }
+          return res.json();
+        })
+        .then(data => {
+            if (Array.isArray(data)) {
+                setTherapists(data);
+            } else {
+                console.error("Fetched data is not an array:", data);
+                setTherapists([]);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            toast({ title: 'Could not load therapists', variant: 'destructive' });
+            setTherapists([]);
+        });
     }
   }, [isAdmin]);
 
