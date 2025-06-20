@@ -1,11 +1,19 @@
+import { db } from "./db";
 import { 
   type Service, type InsertService,
   type Therapist, type InsertTherapist,
   type Package, type InsertPackage,
   type Testimonial, type InsertTestimonial,
   type Booking, type InsertBooking,
-  type User, type InsertUser
+  type User, type InsertUser,
+  services,
+  therapists,
+  packages,
+  testimonials,
+  bookings,
+  users
 } from "@shared/schema";
+import { eq, and, not } from "drizzle-orm";
 
 export interface IStorage {
   // User methods
@@ -43,138 +51,86 @@ export interface IStorage {
   ): Promise<string[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private services: Map<number, Service>;
-  private therapists: Map<number, Therapist>;
-  private packages: Map<number, Package>;
-  private testimonials: Map<number, Testimonial>;
-  private bookings: Map<number, Booking>;
-  
-  private userCurrentId: number;
-  private serviceCurrentId: number;
-  private therapistCurrentId: number;
-  private packageCurrentId: number;
-  private testimonialCurrentId: number;
-  private bookingCurrentId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.services = new Map();
-    this.therapists = new Map();
-    this.packages = new Map();
-    this.testimonials = new Map();
-    this.bookings = new Map();
-    
-    this.userCurrentId = 1;
-    this.serviceCurrentId = 1;
-    this.therapistCurrentId = 1;
-    this.packageCurrentId = 1;
-    this.testimonialCurrentId = 1;
-    this.bookingCurrentId = 1;
-    
-    // Initialize with demo data
-    this.initializeDemoData();
-  }
-
+export class DbStorage implements IStorage {
   // User methods
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result[0];
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const result = await db.select().from(users).where(eq(users.username, username));
+    return result[0];
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.userCurrentId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const result = await db.insert(users).values(insertUser).returning();
+    return result[0];
   }
-  
+
   // Service methods
   async getAllServices(): Promise<Service[]> {
-    return Array.from(this.services.values());
+    return db.select().from(services);
   }
   
   async getService(id: number): Promise<Service | undefined> {
-    return this.services.get(id);
+    const result = await db.select().from(services).where(eq(services.id, id));
+    return result[0];
   }
   
   async createService(service: InsertService): Promise<Service> {
-    const id = this.serviceCurrentId++;
-    const newService: Service = { ...service, id };
-    this.services.set(id, newService);
-    return newService;
+    const result = await db.insert(services).values(service).returning();
+    return result[0];
   }
-  
+
   // Therapist methods
   async getAllTherapists(): Promise<Therapist[]> {
-    return Array.from(this.therapists.values());
+    return db.select().from(therapists);
   }
   
   async getTherapist(id: number): Promise<Therapist | undefined> {
-    return this.therapists.get(id);
+    const result = await db.select().from(therapists).where(eq(therapists.id, id));
+    return result[0];
   }
   
   async createTherapist(therapist: InsertTherapist): Promise<Therapist> {
-    const id = this.therapistCurrentId++;
-    const newTherapist: Therapist = { ...therapist, id };
-    this.therapists.set(id, newTherapist);
-    return newTherapist;
+    const result = await db.insert(therapists).values(therapist).returning();
+    return result[0];
   }
-  
+
   // Package methods
   async getAllPackages(): Promise<Package[]> {
-    return Array.from(this.packages.values());
+    return db.select().from(packages);
   }
   
   async getPackage(id: number): Promise<Package | undefined> {
-    return this.packages.get(id);
+    const result = await db.select().from(packages).where(eq(packages.id, id));
+    return result[0];
   }
   
   async createPackage(pkg: InsertPackage): Promise<Package> {
-    const id = this.packageCurrentId++;
-    const newPackage: Package = { ...pkg, id, popular: pkg.popular || false };
-    this.packages.set(id, newPackage);
-    return newPackage;
+    const result = await db.insert(packages).values(pkg).returning();
+    return result[0];
   }
-  
+
   // Testimonial methods
   async getAllTestimonials(): Promise<Testimonial[]> {
-    return Array.from(this.testimonials.values());
+    return db.select().from(testimonials);
   }
   
   async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
-    const id = this.testimonialCurrentId++;
-    const newTestimonial: Testimonial = { ...testimonial, id };
-    this.testimonials.set(id, newTestimonial);
-    return newTestimonial;
+    const result = await db.insert(testimonials).values(testimonial).returning();
+    return result[0];
   }
   
   // Booking methods
   async createBooking(booking: InsertBooking): Promise<Booking> {
-    const id = this.bookingCurrentId++;
-    const newBooking: Booking = { 
-      ...booking, 
-      id, 
-      createdAt: new Date(),
-      serviceId: booking.serviceId || null,
-      packageId: booking.packageId || null,
-      therapistId: booking.therapistId || null,
-      notes: booking.notes || null
-    };
-    this.bookings.set(id, newBooking);
-    return newBooking;
+    const result = await db.insert(bookings).values(booking).returning();
+    return result[0];
   }
   
   async getBookingsByDate(date: string): Promise<Booking[]> {
-    return Array.from(this.bookings.values()).filter(
-      (booking) => booking.date.toString() === date
-    );
+    return db.select().from(bookings).where(eq(bookings.date, date));
   }
   
   async getAvailableTimeSlots(
@@ -190,189 +146,20 @@ export class MemStorage implements IStorage {
     ];
     
     // Get bookings for the specified date and therapist
-    const bookingsOnDate = Array.from(this.bookings.values()).filter(
-      (booking) => 
-        booking.date.toString() === date && 
-        booking.therapistId === therapistId
-    );
-    
-    // Get booked time slots
+    const bookingsOnDate = await db.select({ time: bookings.time })
+      .from(bookings)
+      .where(
+        and(
+          eq(bookings.date, date),
+          eq(bookings.therapistId, therapistId as number)
+        )
+      );
+      
     const bookedTimeSlots = bookingsOnDate.map(booking => booking.time);
     
     // Filter available time slots
     return allTimeSlots.filter(slot => !bookedTimeSlots.includes(slot));
   }
-  
-  // Initialize with demo data
-  private initializeDemoData() {
-    // Services
-    this.createService({
-      name: "Swedish Massage",
-      description: "A gentle, relaxing massage that uses long strokes, kneading, and circular movements to ease tension and promote relaxation.",
-      price: 85,
-      duration: 60,
-      image: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
-    });
-    
-    this.createService({
-      name: "Deep Tissue Massage",
-      description: "Targets the deeper layers of muscles and connective tissue to release chronic tension and help with muscle injuries.",
-      price: 95,
-      duration: 60,
-      image: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
-    });
-    
-    this.createService({
-      name: "Hot Stone Massage",
-      description: "Smooth, heated stones are placed on key points of the body combined with massage to promote deep relaxation and ease muscle tension.",
-      price: 110,
-      duration: 75,
-      image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
-    });
-    
-    this.createService({
-      name: "Aromatherapy Massage",
-      description: "Combines the power of essential oils with massage techniques to promote healing, reduce stress and enhance wellbeing.",
-      price: 100,
-      duration: 60,
-      image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
-    });
-    
-    this.createService({
-      name: "Sports Massage",
-      description: "Designed to assist in correcting problems and imbalances in soft tissue that are caused by repetitive physical activity.",
-      price: 95,
-      duration: 60,
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
-    });
-    
-    this.createService({
-      name: "Prenatal Massage",
-      description: "Tailored for expectant mothers, this gentle massage helps alleviate pregnancy discomforts and promotes relaxation.",
-      price: 90,
-      duration: 60,
-      image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500"
-    });
-    
-    // Therapists
-    this.createTherapist({
-      name: "Emma Johnson",
-      title: "Senior Massage Therapist",
-      bio: "Emma specializes in Swedish and Deep Tissue massage with over 8 years of experience. Her approach focuses on stress reduction and pain relief.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
-      specialties: ["Swedish", "Deep Tissue", "Hot Stone"]
-    });
-    
-    this.createTherapist({
-      name: "Daniel Chen",
-      title: "Sports Massage Specialist",
-      bio: "Daniel has worked with professional athletes and specializes in sports recovery, injury prevention, and performance enhancement techniques.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
-      specialties: ["Sports", "Deep Tissue", "Myofascial"]
-    });
-    
-    this.createTherapist({
-      name: "Sophia Patel",
-      title: "Holistic Wellness Expert",
-      bio: "Sophia combines aromatherapy with traditional massage techniques to create deeply relaxing and healing experiences.",
-      image: "https://www.pexels.com/photo/photo-of-person-wearing-protective-wear-while-holding-globe-4167541/",
-      specialties: ["Aromatherapy", "Swedish", "Prenatal"]
-    });
-    
-    this.createTherapist({
-      name: "Marcus Williams",
-      title: "Therapeutic Specialist",
-      bio: "Marcus focuses on therapeutic techniques that target chronic pain conditions and help improve mobility and function.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
-      specialties: ["Deep Tissue", "Trigger Point", "Therapeutic"]
-    });
-    
-    this.createTherapist({
-      name: "Olivia Bennett",
-      title: "Luxury Experience Specialist",
-      bio: "Olivia creates premium massage experiences combining hot stone therapy with aromatherapy and advanced techniques.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
-      specialties: ["Hot Stone", "Aromatherapy", "Swedish"]
-    });
-    
-    this.createTherapist({
-      name: "James Rodriguez",
-      title: "Restorative Massage Specialist",
-      bio: "James specializes in helping clients recover from injuries and surgeries through gentle yet effective massage techniques.",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500",
-      specialties: ["Therapeutic", "Gentle Deep Tissue", "Rehabilitation"]
-    });
-    
-    // Packages
-    this.createPackage({
-      name: "Essential Package",
-      description: "A perfect introduction to our spa services",
-      price: 150,
-      features: [
-        "60-min Swedish Massage",
-        "Express Facial Treatment",
-        "Aromatherapy Enhancement",
-        "Spa Access (2 hours)"
-      ],
-      popular: false
-    });
-    
-    this.createPackage({
-      name: "Premium Package",
-      description: "Our most popular comprehensive wellness experience",
-      price: 250,
-      features: [
-        "90-min Deep Tissue or Hot Stone Massage",
-        "Custom Facial Treatment",
-        "Hand & Foot Treatment",
-        "Aromatherapy Enhancement",
-        "Spa Access (Full Day)",
-        "Complimentary Herbal Tea Service"
-      ],
-      popular: true
-    });
-    
-    this.createPackage({
-      name: "Luxury Package",
-      description: "The ultimate spa indulgence for complete rejuvenation",
-      price: 350,
-      features: [
-        "120-min Signature Massage Experience",
-        "Premium Facial Treatment",
-        "Full Body Scrub",
-        "Scalp Treatment",
-        "Private Relaxation Room",
-        "Spa Access (Full Day)",
-        "Gourmet Lunch"
-      ],
-      popular: false
-    });
-    
-    // Testimonials
-    this.createTestimonial({
-      name: "Sarah Thompson",
-      title: "Monthly Member",
-      testimonial: "I've been to many spas, but Zen Spa offers something truly special. Emma's deep tissue massage was exactly what I needed for my chronic back pain. The atmosphere is so peaceful, and the staff is incredibly attentive. I've already booked my next appointment!",
-      rating: 5,
-      image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
-    });
-    
-    this.createTestimonial({
-      name: "Michael Reynolds",
-      title: "Package Client",
-      testimonial: "The Premium Package was the perfect gift for our anniversary. Daniel's sports massage techniques helped with my shoulder injury from tennis, and my wife loved the hot stone treatment. The private relaxation room was a wonderful touch. We'll definitely be returning!",
-      rating: 5,
-      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671d66?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
-    });
-    
-    this.createTestimonial({
-      name: "Jennifer Lawson",
-      title: "Regular Client",
-      testimonial: "As someone with a high-stress job, my monthly massage at Zen Spa has become essential for my wellbeing. Sophia's aromatherapy massage is transformative - I feel like a new person afterward. The online booking system makes it so easy to schedule appointments around my busy calendar.",
-      rating: 4.5,
-      image: "https://images.unsplash.com/photo-1494790108755-2616c04707e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"
-    });
-  }
 }
 
-export const storage = new MemStorage();
+export const storage = new DbStorage();
