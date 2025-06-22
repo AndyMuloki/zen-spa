@@ -91,5 +91,37 @@ adminRoutes.delete("/therapists/:id", isAdmin, async (req, res) => {
   res.status(204).send();
 });
 
+// Service Management
+adminRoutes.get("/services", isAdmin, async (req, res) => {
+  const allServices = await storage.getAllServices();
+  res.json(allServices);
+});
+
+adminRoutes.post("/services", isAdmin, async (req, res) => {
+  try {
+    // Note: Drizzle-zod schema can be used here for validation if needed
+    const newService = await storage.createService(req.body);
+    res.status(201).json(newService);
+  } catch (error) {
+    res.status(400).json({ message: "Validation error", error });
+  }
+});
+
+adminRoutes.put("/services/:id", isAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const updatedService = await storage.updateService(id, req.body);
+    res.json(updatedService);
+  } catch (error) {
+    res.status(400).json({ message: "Validation error", error });
+  }
+});
+
+adminRoutes.delete("/services/:id", isAdmin, async (req, res) => {
+  const id = parseInt(req.params.id);
+  await storage.deleteService(id);
+  res.status(204).send();
+});
+
 
 export default adminRoutes; 

@@ -13,7 +13,7 @@ import {
   bookings,
   users
 } from "@shared/schema";
-import { eq, and, not } from "drizzle-orm";
+import { eq, and, not, asc } from "drizzle-orm";
 
 export interface IStorage {
   // User methods
@@ -25,6 +25,8 @@ export interface IStorage {
   getAllServices(): Promise<Service[]>;
   getService(id: number): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
+  updateService(id: number, service: Partial<InsertService>): Promise<Service>;
+  deleteService(id: number): Promise<void>;
   
   // Therapist methods
   getAllTherapists(): Promise<Therapist[]>;
@@ -69,10 +71,10 @@ export class DbStorage implements IStorage {
     const result = await db.insert(users).values(insertUser).returning();
     return result[0];
   }
-
+  
   // Service methods
   async getAllServices(): Promise<Service[]> {
-    return db.select().from(services);
+    return db.select().from(services).orderBy(asc(services.id));
   }
   
   async getService(id: number): Promise<Service | undefined> {
@@ -85,9 +87,18 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
+  async updateService(id: number, service: Partial<InsertService>): Promise<Service> {
+    const result = await db.update(services).set(service).where(eq(services.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteService(id: number): Promise<void> {
+    await db.delete(services).where(eq(services.id, id));
+  }
+  
   // Therapist methods
   async getAllTherapists(): Promise<Therapist[]> {
-    return db.select().from(therapists);
+    return db.select().from(therapists).orderBy(asc(therapists.id));
   }
   
   async getTherapist(id: number): Promise<Therapist | undefined> {
@@ -108,7 +119,7 @@ export class DbStorage implements IStorage {
   async deleteTherapist(id: number): Promise<void> {
     await db.delete(therapists).where(eq(therapists.id, id));
   }
-
+  
   // Package methods
   async getAllPackages(): Promise<Package[]> {
     return db.select().from(packages);
@@ -123,7 +134,7 @@ export class DbStorage implements IStorage {
     const result = await db.insert(packages).values(pkg).returning();
     return result[0];
   }
-
+  
   // Testimonial methods
   async getAllTestimonials(): Promise<Testimonial[]> {
     return db.select().from(testimonials);

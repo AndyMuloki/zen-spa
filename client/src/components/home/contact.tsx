@@ -1,6 +1,7 @@
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useRef } from "react";
 import { MapPin, Clock, Phone, Mail, Instagram, Facebook } from "lucide-react";
+import { FaWhatsapp } from 'react-icons/fa';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -115,7 +116,8 @@ export default function Contact() {
               <h3 className="text-xl font-serif text-gray-100 mb-4">Contact Information</h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
-                  <Phone className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
+                  {/* Icon goes here... */}
+                  <FaWhatsapp className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0 transition duration-300 hover:scale-125 hover:text-teal-300 hover:drop-shadow-lg" />
                   <p className="text-gray-300">(555) 123-4567</p>
                 </div>
                 <div className="flex items-center">

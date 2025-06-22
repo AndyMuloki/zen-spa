@@ -21,6 +21,8 @@ export default function Header() {
     };
   }, []);
 
+  const isHomePage = location === "/";
+
   // Close mobile menu when clicking on a link
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -39,17 +41,21 @@ export default function Header() {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#services" className="text-gray-800 hover:text-primary transition-colors font-medium">Services</a>
-          <a href="#therapists" className="text-gray-800 hover:text-primary transition-colors font-medium">Therapists</a>
-          <a href="#packages" className="text-gray-800 hover:text-primary transition-colors font-medium">Packages</a>
-          <a href="#testimonials" className="text-gray-800 hover:text-primary transition-colors font-medium">Testimonials</a>
-          <a href="#contact" className="text-gray-800 hover:text-primary transition-colors font-medium">Contact</a>
-          <a href="#booking" className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark transition-colors">Book Now</a>
+          {isHomePage && (
+            <>
+              <a href="#services" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors font-medium`}>Services</a>
+              <a href="#therapists" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors font-medium`}>Therapists</a>
+              <a href="#packages" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors font-medium`}>Packages</a>
+              <a href="#testimonials" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors font-medium`}>Testimonials</a>
+              <a href="#contact" className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-primary transition-colors font-medium`}>Contact</a>
+            </>
+          )}
+          <a href={isHomePage ? "#booking" : "/#booking"} className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark transition-colors">Book Now</a>
         </nav>
         
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-neutral-dark"
+          className={`md:hidden ${isScrolled ? 'text-neutral-dark' : 'text-white'}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -65,43 +71,47 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white absolute w-full border-b border-neutral">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            {isHomePage && (
+              <>
+                <a 
+                  href="#services" 
+                  className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
+                  onClick={closeMobileMenu}
+                >
+                  Services
+                </a>
+                <a 
+                  href="#therapists" 
+                  className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
+                  onClick={closeMobileMenu}
+                >
+                  Therapists
+                </a>
+                <a 
+                  href="#packages" 
+                  className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
+                  onClick={closeMobileMenu}
+                >
+                  Packages
+                </a>
+                <a 
+                  href="#testimonials" 
+                  className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
+                  onClick={closeMobileMenu}
+                >
+                  Testimonials
+                </a>
+                <a 
+                  href="#contact" 
+                  className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
+                  onClick={closeMobileMenu}
+                >
+                  Contact
+                </a>
+              </>
+            )}
             <a 
-              href="#services" 
-              className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
-              onClick={closeMobileMenu}
-            >
-              Services
-            </a>
-            <a 
-              href="#therapists" 
-              className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
-              onClick={closeMobileMenu}
-            >
-              Therapists
-            </a>
-            <a 
-              href="#packages" 
-              className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
-              onClick={closeMobileMenu}
-            >
-              Packages
-            </a>
-            <a 
-              href="#testimonials" 
-              className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
-              onClick={closeMobileMenu}
-            >
-              Testimonials
-            </a>
-            <a 
-              href="#contact" 
-              className="text-neutral-dark hover:text-primary transition-colors font-medium py-2"
-              onClick={closeMobileMenu}
-            >
-              Contact
-            </a>
-            <a 
-              href="#booking" 
+              href={isHomePage ? "#booking" : "/#booking"} 
               className="bg-primary text-white px-6 py-3 rounded-md hover:bg-primary-dark transition-colors text-center mt-2"
               onClick={closeMobileMenu}
             >
