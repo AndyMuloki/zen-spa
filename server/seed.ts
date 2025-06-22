@@ -76,7 +76,7 @@ async function seed() {
     },
     {
       name: "Sophia Patel",
-      title: "Holistic Wellness Expert",
+      title: "Mercy is so hot",
       bio: "Sophia combines aromatherapy with traditional massage techniques to create deeply relaxing and healing experiences.",
       image: "https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg?auto=compress&cs=tinysrgb&w=800&h=500",
       specialties: ["Aromatherapy", "Swedish", "Prenatal"]
