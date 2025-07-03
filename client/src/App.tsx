@@ -8,6 +8,10 @@ import AdminPage from "@/pages/admin";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
+import ReactGA from "react-ga4";
+
+// Initialize Google Analytics 4 (replace with your GA4 Measurement ID)
+ReactGA.initialize("G-B531HTTM0Q");
 
 function Router() {
   const [location] = useLocation();

@@ -1,4 +1,6 @@
 import { FaWhatsapp } from "react-icons/fa";
+import React from "react";
+import ReactGA from "react-ga4";
 
 interface WhatsAppButtonProps {
   phoneNumber: string; // In international format, e.g. "15551234567"
@@ -12,6 +14,17 @@ export default function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonP
     baseUrl +
     phoneNumber +
     (message ? `?text=${encodeURIComponent(message)}` : "");
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Fire GA4 event
+    ReactGA.event({
+      category: "Engagement",
+      action: "Click WhatsApp Button",
+      label: "WhatsApp CTA"
+    });
+    // Let the navigation proceed after event fires
+    // (GA4 events are async but fast; no need to delay navigation)
+  };
 
   return (
     <a
@@ -29,6 +42,7 @@ export default function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonP
         focus:outline-none focus:ring-4 focus:ring-green-300
         group
       "
+      onClick={handleClick}
     >
       <FaWhatsapp className="text-white text-3xl group-hover:animate-bounce" />
       <span className="sr-only">Chat with us on WhatsApp</span>
