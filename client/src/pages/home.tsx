@@ -46,6 +46,7 @@ export default function Home() {
       <Contact />
       
       {/* Fixed Booking Button (Mobile) */}
+      {/**
       <div className="fixed bottom-4 right-4 md:hidden z-40">
         <a 
           href="#booking" 
@@ -55,6 +56,7 @@ export default function Home() {
           <Calendar className="h-5 w-5" />
         </a>
       </div>
+      */}
     </>
   );
 }

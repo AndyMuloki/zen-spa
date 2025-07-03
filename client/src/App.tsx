@@ -7,6 +7,7 @@ import BookingSuccess from "@/pages/booking-success";
 import AdminPage from "@/pages/admin";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 function Router() {
   const [location] = useLocation();
@@ -33,6 +34,7 @@ function App() {
         <Header />
         <main className="flex-grow">
           <Router />
+          <WhatsAppButton phoneNumber="254740006578" message="Hello 👋 I’d like to inquire about your massage services and availability. Could you assist me?" />
         </main>
         <Footer />
       </div>
