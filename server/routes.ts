@@ -53,6 +53,43 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Create a package
+  app.post("/api/packages", async (req, res) => {
+    try {
+      const pkg = req.body;
+      const created = await storage.createPackage(pkg);
+      res.status(201).json(created);
+    } catch (error) {
+      console.error("Error creating package:", error);
+      res.status(500).json({ message: "Failed to create package" });
+    }
+  });
+
+  // Update a package
+  app.put("/api/packages/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const pkg = req.body;
+      const updated = await storage.updatePackage(id, pkg);
+      res.json(updated);
+    } catch (error) {
+      console.error("Error updating package:", error);
+      res.status(500).json({ message: "Failed to update package" });
+    }
+  });
+
+  // Delete a package
+  app.delete("/api/packages/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deletePackage(id);
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error deleting package:", error);
+      res.status(500).json({ message: "Failed to delete package" });
+    }
+  });
+
   // Get all testimonials
   app.get("/api/testimonials", async (req, res) => {
     try {

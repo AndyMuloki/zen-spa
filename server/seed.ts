@@ -143,7 +143,6 @@ async function seed() {
         "Full Body Scrub",
         "Scalp Treatment",
         "Private Relaxation Room",
-        "Spa Access (Full Day)",
         "Gourmet Lunch"
       ],
       popular: false

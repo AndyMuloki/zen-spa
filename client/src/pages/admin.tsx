@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { type Therapist, insertTherapistSchema, type Service, insertServiceSchema } from '@shared/schema';
+import { type Therapist, insertTherapistSchema, type Service, insertServiceSchema, type Package, insertPackageSchema } from '@shared/schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,6 +13,8 @@ export default function AdminPage() {
   const [editingTherapist, setEditingTherapist] = useState<Partial<Therapist> | null>(null);
   const [services, setServices] = useState<Service[]>([]);
   const [editingService, setEditingService] = useState<Partial<Service> | null>(null);
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [editingPackage, setEditingPackage] = useState<Partial<Omit<Package, 'features' | 'price'> & { features: string; price: string }> | null>(null);
   const { toast } = useToast();
 
   // Check session status on load
@@ -68,6 +70,17 @@ export default function AdminPage() {
         .catch(error => {
             console.error(error);
             toast({ title: 'Could not load services', variant: 'destructive' });
+        });
+      // Fetch packages
+      fetch('/api/packages')
+        .then((res) => {
+            if (!res.ok) throw new Error('Failed to fetch packages');
+            return res.json();
+        })
+        .then(setPackages)
+        .catch(error => {
+            console.error(error);
+            toast({ title: 'Could not load packages', variant: 'destructive' });
         });
     }
   }, [isAdmin]);
@@ -173,6 +186,61 @@ export default function AdminPage() {
     setEditingService({ ...editingService, [name]: value });
   };
 
+  const handleSavePackage = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!editingPackage) return;
+    const url = editingPackage.id ? `/api/packages/${editingPackage.id}` : '/api/packages';
+    const method = editingPackage.id ? 'PUT' : 'POST';
+    try {
+      const dataToSave = {
+        ...editingPackage,
+        price: editingPackage && editingPackage.price ? Number(editingPackage.price) : 0,
+        features: editingPackage && editingPackage.features
+          ? editingPackage.features.split(',').map((f: string) => f.trim())
+          : [],
+        popular: Boolean(editingPackage && editingPackage.popular),
+      };
+      const parsedData = insertPackageSchema.partial().parse(dataToSave);
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(parsedData),
+      });
+      if (res.ok) {
+        toast({ title: 'Package saved successfully' });
+        setEditingPackage(null);
+        fetch('/api/packages').then((res) => res.json()).then(setPackages);
+      } else {
+        toast({ title: 'Failed to save package', variant: 'destructive' });
+      }
+    } catch (error) {
+      toast({ title: 'Invalid data', description: 'Please check the form fields.', variant: 'destructive' });
+      console.error(error);
+    }
+  };
+
+  const handleDeletePackage = async (id: number) => {
+    if (window.confirm('Are you sure you want to delete this package?')) {
+      const res = await fetch(`/api/packages/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        toast({ title: 'Package deleted' });
+        setPackages(packages.filter((p) => p.id !== id));
+      } else {
+        toast({ title: 'Failed to delete package', variant: 'destructive' });
+      }
+    }
+  };
+
+  const handleEditPackageChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (!editingPackage) return;
+    const { name, value } = e.target;
+    if (name === 'popular' && e.target instanceof HTMLInputElement) {
+      setEditingPackage({ ...editingPackage, popular: e.target.checked });
+    } else {
+      setEditingPackage({ ...editingPackage, [name]: value });
+    }
+  };
+
   if (!isAdmin) {
     return (
       <div className="container mx-auto p-4 pt-24">
@@ -245,6 +313,30 @@ export default function AdminPage() {
         </Card>
       )}
 
+      {editingPackage && (
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>{editingPackage.id ? 'Edit' : 'Add'} Package</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSavePackage} className="space-y-4">
+              <Input name="name" placeholder="Package Name" value={editingPackage.name || ''} onChange={handleEditPackageChange} />
+              <Textarea name="description" placeholder="Description" value={editingPackage.description || ''} onChange={handleEditPackageChange} />
+              <Input name="price" type="number" placeholder="Price" value={editingPackage.price || ''} onChange={handleEditPackageChange} />
+              <Input name="features" placeholder="Features (comma-separated)" value={editingPackage.features || ''} onChange={handleEditPackageChange} />
+              <label className="flex items-center gap-2">
+                <input type="checkbox" name="popular" checked={!!editingPackage.popular} onChange={handleEditPackageChange} />
+                Popular
+              </label>
+              <div className="flex gap-2">
+                <Button type="submit">Save Package</Button>
+                <Button variant="outline" onClick={() => setEditingPackage(null)}>Cancel</Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      )}
+
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
@@ -283,6 +375,28 @@ export default function AdminPage() {
                   <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => setEditingService(service)}>Edit</Button>
                     <Button variant="destructive" size="sm" onClick={() => handleDeleteService(service.id)}>Delete</Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <CardTitle>Manage Packages</CardTitle>
+              <Button onClick={() => setEditingPackage({ features: '', price: '' })}>Add New Package</Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {packages.map((pkg) => (
+                <div key={pkg.id} className="flex justify-between items-center p-2 border rounded-md">
+                  <span>{pkg.name}</span>
+                  <div className="space-x-2">
+                    <Button variant="outline" size="sm" onClick={() => setEditingPackage({ ...pkg, features: pkg.features?.join(', ') || '', price: String(pkg.price) })}>Edit</Button>
+                    <Button variant="destructive" size="sm" onClick={() => handleDeletePackage(pkg.id)}>Delete</Button>
                   </div>
                 </div>
               ))}

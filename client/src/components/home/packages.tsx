@@ -13,6 +13,9 @@ export default function Packages() {
     queryKey: ["/api/packages"],
   });
 
+  const packageOrder = ["Essential Package", "Premium Package", "Luxury Package"];
+  const orderedPackages = packages ? [...packages].sort((a, b) => packageOrder.indexOf(a.name) - packageOrder.indexOf(b.name)) : [];
+
   return (
     <section id="packages" className="py-20 bg-gray-800">
       <div className="container mx-auto px-4">
@@ -43,7 +46,7 @@ export default function Packages() {
             </div>
           )}
           
-          {packages?.map((pkg, index) => (
+          {orderedPackages.map((pkg, index) => (
             <PackageCard 
               key={pkg.id} 
               pkg={pkg} 

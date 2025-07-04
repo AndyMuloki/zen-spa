@@ -39,6 +39,8 @@ export interface IStorage {
   getAllPackages(): Promise<Package[]>;
   getPackage(id: number): Promise<Package | undefined>;
   createPackage(pkg: InsertPackage): Promise<Package>;
+  updatePackage(id: number, pkg: Partial<InsertPackage>): Promise<Package>;
+  deletePackage(id: number): Promise<void>;
   
   // Testimonial methods
   getAllTestimonials(): Promise<Testimonial[]>;
@@ -122,7 +124,7 @@ export class DbStorage implements IStorage {
   
   // Package methods
   async getAllPackages(): Promise<Package[]> {
-    return db.select().from(packages);
+    return db.select().from(packages).orderBy(asc(packages.id));
   }
   
   async getPackage(id: number): Promise<Package | undefined> {
@@ -133,6 +135,15 @@ export class DbStorage implements IStorage {
   async createPackage(pkg: InsertPackage): Promise<Package> {
     const result = await db.insert(packages).values(pkg).returning();
     return result[0];
+  }
+
+  async updatePackage(id: number, pkg: Partial<InsertPackage>): Promise<Package> {
+    const result = await db.update(packages).set(pkg).where(eq(packages.id, id)).returning();
+    return result[0];
+  }
+
+  async deletePackage(id: number): Promise<void> {
+    await db.delete(packages).where(eq(packages.id, id));
   }
   
   // Testimonial methods
