@@ -118,7 +118,7 @@ export default function Contact() {
                 <div className="flex items-center">
                   {/* Icon goes here... */}
                   <FaWhatsapp className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0 transition duration-300 hover:scale-125 hover:text-teal-300 hover:drop-shadow-lg" />
-                  <p className="text-gray-300">+254740006578</p>
+                  <p className="text-gray-300">(+254)743087666</p>
                 </div>
                 <div className="flex items-center">
                   <Mail className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
