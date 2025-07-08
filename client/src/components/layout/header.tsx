@@ -36,7 +36,7 @@ export default function Header() {
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <span className="text-primary text-2xl md:text-3xl font-serif font-medium">Zen Spa</span>
+          <span className="text-primary text-2xl md:text-3xl font-serif font-medium">Mimi Spa</span>
         </Link>
         
         {/* Desktop Navigation */}

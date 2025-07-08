@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-serif mb-4">Zen Spa</h3>
+            <h3 className="text-xl font-serif mb-4">Mimi Spa</h3>
             <p className="text-white opacity-70 mb-4">Experience the perfect harmony of skilled therapists and tranquil surroundings for complete wellness and rejuvenation.</p>
             <div className="flex space-x-4">
               <a href="#" className="text-white opacity-70 hover:opacity-100 transition-opacity">
@@ -74,7 +74,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white border-opacity-20 pt-8 text-center">
-          <p className="text-white opacity-70">&copy; {new Date().getFullYear()} Zen Spa. All rights reserved.</p>
+          <p className="text-white opacity-70">&copy; {new Date().getFullYear()} Mimi Spa. All rights reserved.</p>
         </div>
       </div>
     </footer>
