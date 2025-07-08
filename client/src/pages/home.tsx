@@ -13,15 +13,15 @@ import { animateOnScroll } from "@/lib/animations";
 export default function Home() {
   useEffect(() => {
     // Set page title and meta description
-    document.title = "Zen Spa - Modern Massage & Wellness";
+    document.title = "Mimi Spa - Modern Massage & Wellness";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Experience tranquility and renewal at Zen Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment.');
+      metaDescription.setAttribute('content', 'Experience tranquility and renewal at Mimi Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment.');
     } else {
       const newMetaDescription = document.createElement('meta');
       newMetaDescription.setAttribute('name', 'description');
-      newMetaDescription.setAttribute('content', 'Experience tranquility and renewal at Zen Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment.');
+      newMetaDescription.setAttribute('content', 'Experience tranquility and renewal at Mimi Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment.');
       document.head.appendChild(newMetaDescription);
     }
     
