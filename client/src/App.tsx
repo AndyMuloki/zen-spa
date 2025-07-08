@@ -48,7 +48,7 @@ function App() {
         <Header />
         <main className="flex-grow">
           <Router />
-          <WhatsAppButton phoneNumber="254740006578" message="Hello 👋 I’d like to inquire about your massage services and availability. Could you assist me?" />
+          <WhatsAppButton phoneNumber="254743087666" message="Hello 👋 I’d like to inquire about your massage services and availability. Could you assist me?" />
         </main>
         <Footer />
       </div>
