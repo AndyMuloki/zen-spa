@@ -161,7 +161,7 @@ export class DbStorage implements IStorage {
 
   // Booking methods
   async getAllBookings(): Promise<Booking[]> {
-    return db.select().from(bookings).orderBy(asc(bookings.date));
+    return db.select().from(bookings).where(eq(bookings.isDeleted, false)).orderBy(asc(bookings.date));
   }
 
   async createBooking(booking: InsertBooking): Promise<Booking> {
@@ -170,11 +170,11 @@ export class DbStorage implements IStorage {
   }
 
   async deleteBooking(id: number): Promise<void> {
-    await db.delete(bookings).where(eq(bookings.id, id));
+    await db.update(bookings).set({ isDeleted: true }).where(eq(bookings.id, id));
   }
   
-  async getBookingsByDate(date: string): Promise<Booking[]> {''
-    return db.select().from(bookings).where(eq(bookings.date, date));
+  async getBookingsByDate(date: string): Promise<Booking[]> {
+    return db.select().from(bookings).where(and(eq(bookings.date, date), eq(bookings.isDeleted, false)));
   }
   
   async getAvailableTimeSlots(

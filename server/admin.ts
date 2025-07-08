@@ -123,5 +123,26 @@ adminRoutes.delete("/services/:id", isAdmin, async (req, res) => {
   res.status(204).send();
 });
 
+// Get all bookings (admin only)
+adminRoutes.get("/bookings", isAdmin, async (req, res) => {
+  try {
+    const allBookings = await storage.getAllBookings();
+    res.json(allBookings);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch bookings", error });
+  }
+});
+
+// Optionally, add a delete route for bookings if you want to support cancellation
+adminRoutes.delete("/bookings/:id", isAdmin, async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    await storage.deleteBooking(id);
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete booking", error });
+  }
+});
+
 
 export default adminRoutes; 

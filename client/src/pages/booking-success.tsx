@@ -62,7 +62,7 @@ export default function BookingSuccess() {
           </div>
           
           <p className="text-neutral-dark text-sm">
-            If you need to reschedule or have any questions, please call us at (555) 123-4567.
+            If you need to reschedule or have any questions, please call us at (+254) 743087666.
           </p>
         </CardContent>
         

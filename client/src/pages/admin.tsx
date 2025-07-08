@@ -436,16 +436,34 @@ export default function AdminPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {bookings.map((booking) => (
-              <div key={booking.id} className="flex justify-between items-center p-2 border rounded-md">
-                <div>
-                  <p className="font-bold">{booking.firstName} {booking.lastName}</p>
-                  <p>{booking.email} - {booking.phone}</p>
-                  <p>Date: {booking.date} at {booking.time}</p>
+            {bookings.map((booking) => {
+              // Find the service, package, and therapist by ID
+              const service = services.find(s => s.id === booking.serviceId);
+              const pkg = packages.find(p => p.id === booking.packageId);
+              const therapist = therapists.find(t => t.id === booking.therapistId);
+
+              return (
+                <div key={booking.id} className="flex justify-between items-center p-2 border rounded-md">
+                  <div>
+                    <p className="font-bold">{booking.firstName} {booking.lastName}</p>
+                    <p>{booking.email} - {booking.phone}</p>
+                    <p>
+                      {booking.serviceId && service && (
+                        <>Service: <span className="font-semibold">{service.name}</span><br /></>
+                      )}
+                      {booking.packageId && pkg && (
+                        <>Package: <span className="font-semibold">{pkg.name}</span><br /></>
+                      )}
+                      {therapist && (
+                        <>Therapist: <span className="font-semibold">{therapist.name}</span><br /></>
+                      )}
+                      Date: {booking.date} at {booking.time}
+                    </p>
+                  </div>
+                  <Button variant="destructive" size="sm" onClick={() => handleDeleteBooking(booking.id)}>Cancel</Button>
                 </div>
-                <Button variant="destructive" size="sm" onClick={() => handleDeleteBooking(booking.id)}>Cancel</Button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </CardContent>
       </Card>

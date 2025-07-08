@@ -74,6 +74,7 @@ export const bookings = pgTable("bookings", {
   time: text("time").notNull(),
   notes: text("notes"),
   createdAt: timestamp("created_at").defaultNow(),
+  isDeleted: boolean("is_deleted").notNull().default(false),
 });
 
 export const insertBookingSchema = createInsertSchema(bookings).omit({ 
