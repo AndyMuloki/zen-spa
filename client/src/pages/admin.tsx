@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { type Therapist, insertTherapistSchema, type Service, insertServiceSchema, type Package, insertPackageSchema } from '@shared/schema';
+import { type Therapist, insertTherapistSchema, type Service, insertServiceSchema, type Package, insertPackageSchema, type Booking } from '@shared/schema';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,6 +15,7 @@ export default function AdminPage() {
   const [editingService, setEditingService] = useState<Partial<Service> | null>(null);
   const [packages, setPackages] = useState<Package[]>([]);
   const [editingPackage, setEditingPackage] = useState<Partial<Omit<Package, 'features' | 'price'> & { features: string; price: string }> | null>(null);
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const { toast } = useToast();
 
   // Check session status on load
@@ -81,6 +82,18 @@ export default function AdminPage() {
         .catch(error => {
             console.error(error);
             toast({ title: 'Could not load packages', variant: 'destructive' });
+        });
+
+      // Fetch bookings
+      fetch('/api/admin/bookings')
+        .then((res) => {
+            if (!res.ok) throw new Error('Failed to fetch bookings');
+            return res.json();
+        })
+        .then(setBookings)
+        .catch(error => {
+            console.error(error);
+            toast({ title: 'Could not load bookings', variant: 'destructive' });
         });
     }
   }, [isAdmin]);
@@ -238,6 +251,18 @@ export default function AdminPage() {
       setEditingPackage({ ...editingPackage, popular: e.target.checked });
     } else {
       setEditingPackage({ ...editingPackage, [name]: value });
+    }
+  };
+
+  const handleDeleteBooking = async (id: number) => {
+    if (window.confirm('Are you sure you want to delete this booking?')) {
+      const res = await fetch(`/api/admin/bookings/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        toast({ title: 'Booking deleted' });
+        setBookings(bookings.filter((b) => b.id !== id));
+      } else {
+        toast({ title: 'Failed to delete booking', variant: 'destructive' });
+      }
     }
   };
 
@@ -404,6 +429,26 @@ export default function AdminPage() {
           </CardContent>
         </Card>
       </div>
+
+      <Card className="mt-6">
+        <CardHeader>
+          <CardTitle>Manage Bookings</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {bookings.map((booking) => (
+              <div key={booking.id} className="flex justify-between items-center p-2 border rounded-md">
+                <div>
+                  <p className="font-bold">{booking.firstName} {booking.lastName}</p>
+                  <p>{booking.email} - {booking.phone}</p>
+                  <p>Date: {booking.date} at {booking.time}</p>
+                </div>
+                <Button variant="destructive" size="sm" onClick={() => handleDeleteBooking(booking.id)}>Cancel</Button>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
-} 
+}

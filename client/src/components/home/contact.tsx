@@ -74,31 +74,31 @@ export default function Contact() {
             <div className="h-64 bg-neutral-light relative">
               <img 
                 src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600" 
-                alt="Zen Spa Location" 
+                alt="Mimi Spa Location" 
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-white bg-opacity-90 p-4 rounded-md text-center shadow-md">
                   <p className="font-medium text-primary">Interactive Map</p>
-                  <p className="text-sm text-neutral-dark opacity-80">(Map would be implemented here)</p>
+                  {/* <p className="text-sm text-neutral-dark opacity-80">(Map would be implemented here)</p> */}
                 </div>
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-serif text-gray-100 mb-4">Zen Spa Location</h3>
+              <h3 className="text-xl font-serif text-gray-100 mb-4">Mimi Spa Location</h3>
               <div className="space-y-3">
                 <div className="flex items-start">
                   <MapPin className="text-teal-400 mr-3 mt-1 h-5 w-5 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">1234 Serenity Avenue</p>
-                    <p className="text-gray-300">San Francisco, CA 94107</p>
+                    <p className="text-gray-300">Gitanga Road</p>
+                    <p className="text-gray-300">Lavington, Nairobi</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <Clock className="text-teal-400 mr-3 h-5 w-5 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">Monday - Friday: 9am - 8pm</p>
-                    <p className="text-gray-300">Saturday - Sunday: 10am - 6pm</p>
+                    <p className="text-gray-300">Monday - Friday: 8am - 9pm</p>
+                    <p className="text-gray-300">Saturday - Sunday: 9am - 8pm</p>
                   </div>
                 </div>
               </div>

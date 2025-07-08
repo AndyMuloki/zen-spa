@@ -45,9 +45,11 @@ export interface IStorage {
   // Testimonial methods
   getAllTestimonials(): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
-  
+
   // Booking methods
+  getAllBookings(): Promise<Booking[]>;
   createBooking(booking: InsertBooking): Promise<Booking>;
+  deleteBooking(id: number): Promise<void>;
   getBookingsByDate(date: string): Promise<Booking[]>;
   getAvailableTimeSlots(
     date: string, 
@@ -156,13 +158,22 @@ export class DbStorage implements IStorage {
     return result[0];
   }
   
+
   // Booking methods
+  async getAllBookings(): Promise<Booking[]> {
+    return db.select().from(bookings).orderBy(asc(bookings.date));
+  }
+
   async createBooking(booking: InsertBooking): Promise<Booking> {
     const result = await db.insert(bookings).values(booking).returning();
     return result[0];
   }
+
+  async deleteBooking(id: number): Promise<void> {
+    await db.delete(bookings).where(eq(bookings.id, id));
+  }
   
-  async getBookingsByDate(date: string): Promise<Booking[]> {
+  async getBookingsByDate(date: string): Promise<Booking[]> {''
     return db.select().from(bookings).where(eq(bookings.date, date));
   }
   

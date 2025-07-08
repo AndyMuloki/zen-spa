@@ -19,7 +19,7 @@ export default function NotFound() {
             Return to Homepage
           </a>
         </Link>
-      </div>
+          </div>
     </div>
   );
 }

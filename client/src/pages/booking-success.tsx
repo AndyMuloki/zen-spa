@@ -10,15 +10,15 @@ export default function BookingSuccess() {
 
   useEffect(() => {
     // Set page title and meta description
-    document.title = "Booking Confirmed - Zen Spa";
+    document.title = "Booking Confirmed - Mimi Spa";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Your spa treatment has been successfully booked at Zen Spa. We look forward to helping you relax and rejuvenate.');
+      metaDescription.setAttribute('content', 'Your spa treatment has been successfully booked at Mimi Spa. We look forward to helping you relax and rejuvenate.');
     } else {
       const newMetaDescription = document.createElement('meta');
       newMetaDescription.setAttribute('name', 'description');
-      newMetaDescription.setAttribute('content', 'Your spa treatment has been successfully booked at Zen Spa. We look forward to helping you relax and rejuvenate.');
+      newMetaDescription.setAttribute('content', 'Your spa treatment has been successfully booked at Mimi Spa. We look forward to helping you relax and rejuvenate.');
       document.head.appendChild(newMetaDescription);
     }
 
@@ -38,20 +38,22 @@ export default function BookingSuccess() {
   
   return (
     <div className="min-h-screen pt-24 pb-12 px-4 flex flex-col items-center justify-center bg-neutral-light">
-      <Card className="w-full max-w-md bg-white shadow-lg">
+      <Card className="w-full max-w-md bg-white shadow-2xl rounded-2xl border-0">
         <CardHeader className="text-center pb-4">
-          <CheckCircle className="h-16 w-16 text-success mx-auto mb-2" />
+          <div className="flex justify-center mb-2">
+            <CheckCircle className="h-24 w-24 text-teal-400 drop-shadow-lg" style={{ filter: 'drop-shadow(0 4px 16px rgba(45,212,191,0.3))' }} />
+          </div>
           <CardTitle className="text-2xl font-serif text-neutral-dark">Booking Confirmed!</CardTitle>
         </CardHeader>
         
         <CardContent className="text-center">
           <p className="text-neutral-dark mb-4">
-            Thank you for booking your appointment with Zen Spa. We've sent a confirmation to your email with all the details.
+            Thank you for booking your appointment with Mimi Spa. We've sent a confirmation to your email with all the details.
           </p>
           
-          <div className="bg-primary bg-opacity-10 p-4 rounded-md text-left mb-4">
-            <h3 className="font-medium text-primary mb-2">What's Next?</h3>
-            <ul className="text-neutral-dark space-y-2 text-sm">
+          <div className="bg-teal-50 border border-teal-100 p-4 rounded-lg text-left mb-4">
+            <h3 className="font-medium text-teal-700 mb-2">What's Next?</h3>
+            <ul className="text-teal-900 space-y-2 text-sm">
               <li>• Please arrive 15 minutes before your appointment</li>
               <li>• Wear comfortable clothing</li>
               <li>• Avoid heavy meals before your massage</li>
@@ -66,7 +68,7 @@ export default function BookingSuccess() {
         
         <CardFooter className="flex justify-center pt-2 pb-6">
           <Link href="/">
-            <Button className="bg-primary hover:bg-primary-dark text-white transition-colors">
+            <Button className="bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-md px-8 py-2 shadow-md transition-colors">
               Return Home
             </Button>
           </Link>
