@@ -41,7 +41,7 @@ export default function Home() {
       <ValueProposition />
       <Therapists />
       <Packages />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <BookingForm />
       <Contact />
       
