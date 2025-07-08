@@ -45,7 +45,7 @@ export interface IStorage {
   // Testimonial methods
   getAllTestimonials(): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
-
+  
   // Booking methods
   getAllBookings(): Promise<Booking[]>;
   createBooking(booking: InsertBooking): Promise<Booking>;
@@ -158,7 +158,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
   
-
+  
   // Booking methods
   async getAllBookings(): Promise<Booking[]> {
     return db.select().from(bookings).where(eq(bookings.isDeleted, false)).orderBy(asc(bookings.date));

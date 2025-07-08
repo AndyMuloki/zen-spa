@@ -34,12 +34,12 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-serif mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="/services" className="text-white opacity-70 hover:opacity-100 transition-opacity">Services</Link></li>
-              <li><Link href="/therapists" className="text-white opacity-70 hover:opacity-100 transition-opacity">Therapists</Link></li>
-              <li><Link href="/packages" className="text-white opacity-70 hover:opacity-100 transition-opacity">Packages</Link></li>
-              {/* <li><Link href="/testimonials" className="text-white opacity-70 hover:opacity-100 transition-opacity">Testimonials</Link></li> */}
-              <li><Link href="/booking" className="text-white opacity-70 hover:opacity-100 transition-opacity">Book Now</Link></li>
-              <li><Link href="/contact" className="text-white opacity-70 hover:opacity-100 transition-opacity">Contact</Link></li>
+              <li><a href="#services" className="text-white opacity-70 hover:opacity-100 transition-opacity">Services</a></li>
+              <li><a href="#therapists" className="text-white opacity-70 hover:opacity-100 transition-opacity">Therapists</a></li>
+              <li><a href="#packages" className="text-white opacity-70 hover:opacity-100 transition-opacity">Packages</a></li>
+              {/* <li><a href="#testimonials" className="text-white opacity-70 hover:opacity-100 transition-opacity">Testimonials</a></li> */}
+              <li><a href="#booking" className="text-white opacity-70 hover:opacity-100 transition-opacity">Book Now</a></li>
+              <li><a href="#contact" className="text-white opacity-70 hover:opacity-100 transition-opacity">Contact</a></li>
             </ul>
           </div>
           
