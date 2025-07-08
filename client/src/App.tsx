@@ -9,6 +9,11 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
 import ReactGA from "react-ga4";
+import PrivacyPolicy from "@/pages/privacy-policy";
+import TermsOfService from "@/pages/terms-of-service";
+import CancellationPolicy from "@/pages/cancellation-policy";
+import FAQ from "@/pages/faq";
+import GiftCertificates from "@/pages/gift-certificates";
 
 // Initialize Google Analytics 4 (replace with your GA4 Measurement ID)
 ReactGA.initialize("G-B531HTTM0Q");
@@ -25,6 +30,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/booking-success" component={BookingSuccess} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/terms-of-service" component={TermsOfService} />
+      <Route path="/cancellation-policy" component={CancellationPolicy} />
+      <Route path="/faq" component={FAQ} />
+      <Route path="/gift-certificates" component={GiftCertificates} />
       <Route component={NotFound} />
     </Switch>
   );

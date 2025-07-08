@@ -37,7 +37,7 @@ export default function Footer() {
               <li><a href="#services" className="text-white opacity-70 hover:opacity-100 transition-opacity">Services</a></li>
               <li><a href="#therapists" className="text-white opacity-70 hover:opacity-100 transition-opacity">Therapists</a></li>
               <li><a href="#packages" className="text-white opacity-70 hover:opacity-100 transition-opacity">Packages</a></li>
-              <li><a href="#testimonials" className="text-white opacity-70 hover:opacity-100 transition-opacity">Testimonials</a></li>
+              {/* <li><a href="#testimonials" className="text-white opacity-70 hover:opacity-100 transition-opacity">Testimonials</a></li> */}
               <li><a href="#booking" className="text-white opacity-70 hover:opacity-100 transition-opacity">Book Now</a></li>
               <li><a href="#contact" className="text-white opacity-70 hover:opacity-100 transition-opacity">Contact</a></li>
             </ul>
@@ -46,11 +46,11 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-serif mb-4">Spa Policies</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white opacity-70 hover:opacity-100 transition-opacity">Cancellation Policy</a></li>
-              <li><a href="#" className="text-white opacity-70 hover:opacity-100 transition-opacity">Gift Certificates</a></li>
-              <li><a href="#" className="text-white opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</a></li>
-              <li><a href="#" className="text-white opacity-70 hover:opacity-100 transition-opacity">Terms of Service</a></li>
-              <li><a href="#" className="text-white opacity-70 hover:opacity-100 transition-opacity">FAQ</a></li>
+              <li><a href="/cancellation-policy" className="text-white opacity-70 hover:opacity-100 transition-opacity">Cancellation Policy</a></li>
+              <li><a href="/gift-certificates" className="text-white opacity-70 hover:opacity-100 transition-opacity">Gift Certificates</a></li>
+              <li><a href="/privacy-policy" className="text-white opacity-70 hover:opacity-100 transition-opacity">Privacy Policy</a></li>
+              <li><a href="/terms-of-service" className="text-white opacity-70 hover:opacity-100 transition-opacity">Terms of Service</a></li>
+              <li><a href="/faq" className="text-white opacity-70 hover:opacity-100 transition-opacity">FAQ</a></li>
             </ul>
           </div>
           
