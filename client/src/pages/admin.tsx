@@ -18,8 +18,7 @@ export default function AdminPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const { toast } = useToast();
 
-  const params = new URLSearchParams(window.location.search);
-  const adminKey = params.get('key');
+  
 
   // Check session status on load
   useEffect(() => {
@@ -106,7 +105,7 @@ export default function AdminPage() {
     e.preventDefault();
     if (!editingTherapist) return;
 
-    const url = editingTherapist.id ? `/api/admin/therapists/${editingTherapist.id}?key=${adminKey}` : `/api/admin/therapists?key=${adminKey}`;
+    const url = editingTherapist.id ? `/api/admin/therapists/${editingTherapist.id}` : `/api/admin/therapists`;
     const method = editingTherapist.id ? 'PUT' : 'POST';
 
     try {
@@ -122,7 +121,7 @@ export default function AdminPage() {
         toast({ title: 'Therapist saved successfully' });
         setEditingTherapist(null);
         // Refresh list
-        fetch(`/api/admin/therapists?key=${adminKey}`).then((res) => res.json()).then(setTherapists);
+        fetch(`/api/admin/therapists`).then((res) => res.json()).then(setTherapists);
       } else {
         toast({ title: 'Failed to save therapist', variant: 'destructive' });
       }
@@ -133,7 +132,7 @@ export default function AdminPage() {
 
   const handleDeleteTherapist = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this therapist?')) {
-      const res = await fetch(`/api/admin/therapists/${id}?key=${adminKey}`, { method: 'DELETE', credentials: 'include' });
+      const res = await fetch(`/api/admin/therapists/${id}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Therapist deleted' });
         setTherapists(therapists.filter((t) => t.id !== id));
@@ -157,7 +156,7 @@ export default function AdminPage() {
     e.preventDefault();
     if (!editingService) return;
 
-    const url = editingService.id ? `/api/admin/services/${editingService.id}?key=${adminKey}` : `/api/admin/services?key=${adminKey}`;
+    const url = editingService.id ? `/api/admin/services/${editingService.id}` : `/api/admin/services`;
     const method = editingService.id ? 'PUT' : 'POST';
 
     try {
@@ -177,7 +176,7 @@ export default function AdminPage() {
       if (res.ok) {
         toast({ title: 'Service saved successfully' });
         setEditingService(null);
-        fetch(`/api/admin/services?key=${adminKey}`).then((res) => res.json()).then(setServices);
+        fetch(`/api/admin/services`).then((res) => res.json()).then(setServices);
       } else {
         toast({ title: 'Failed to save service', variant: 'destructive' });
       }
@@ -189,7 +188,7 @@ export default function AdminPage() {
 
   const handleDeleteService = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
-      const res = await fetch(`/api/admin/services/${id}?key=${adminKey}`, { method: 'DELETE', credentials: 'include' });
+      const res = await fetch(`/api/admin/services/${id}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Service deleted' });
         setServices(services.filter((s) => s.id !== id));
@@ -263,7 +262,7 @@ export default function AdminPage() {
 
   const handleDeleteBooking = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
-      const res = await fetch(`/api/admin/bookings/${id}?key=${adminKey}`, { method: 'DELETE', credentials: 'include' });
+      const res = await fetch(`/api/admin/bookings/${id}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Booking deleted' });
         setBookings(bookings.filter((b) => b.id !== id));
