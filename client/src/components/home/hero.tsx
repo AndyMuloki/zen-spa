@@ -19,7 +19,7 @@ export default function Hero() {
           data-animate
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl text-white font-serif font-medium leading-tight">
-            Find Balance & Renewal at Zen Spa
+            Find Balance & Renewal at Mimi Spa
           </h1>
           <p className="text-white text-lg mt-6 md:pr-12">
             Experience the perfect harmony of skilled therapists and tranquil surroundings. Our massage services are designed to restore your body and calm your mind.
