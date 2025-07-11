@@ -4,17 +4,10 @@ import { setupVite, serveStatic, log } from "./vite";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import adminRoutes from "./admin";
-import cors from 'cors';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// Add CORS middleware BEFORE session middleware
-app.use(cors({
-  origin: 'https://mimispa.spa',
-  credentials: true,
-}));
 
 const PgSession = pgSession(session);
 
@@ -27,10 +20,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      // secure: process.env.NODE_ENV === "production", // true in production
-      // domain: '.mimispa.spa',
-      secure: true,
-      sameSite: 'none', // allow cross-ste cookies
+      secure: process.env.NODE_ENV === "production", // true in production
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
@@ -67,14 +57,6 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/admin", adminRoutes);
-app.get('/test-cookie', (req, res) => {
-  res.cookie('testcookie', 'hello', {
-    secure: true,
-    sameSite: 'none',
-    httpOnly: true,
-  });
-  res.json({ message: 'Test cookie set' });
-});
 
 (async () => {
   const server = await registerRoutes(app);

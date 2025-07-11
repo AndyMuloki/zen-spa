@@ -51,7 +51,7 @@ function ValueCard({ icon: Icon, title, description, index }: ValueCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(cardRef, { threshold: 0.1 });
   const animationDelay = `${100 + (index * 150)}ms`;
-  
+
   return (
     <div 
       ref={cardRef}
