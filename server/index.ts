@@ -28,7 +28,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       // secure: process.env.NODE_ENV === "production", // true in production
-      domain: '.mimispa.spa',
+      // domain: '.mimispa.spa',
       secure: true,
       sameSite: 'none', // allow cross-ste cookies
       maxAge: 1000 * 60 * 60 * 24, // 1 day
