@@ -34,6 +34,7 @@ export default function AdminPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: 'admin', password }),
+      credentials: 'include',
     });
     if (res.ok) {
       setIsAdmin(true);
@@ -53,7 +54,7 @@ export default function AdminPage() {
   useEffect(() => {
     if (isAdmin) {
       // Fetch therapists
-      fetch(`/api/admin/therapists?key=${adminKey}`)
+      fetch(`/api/admin/therapists`, { credentials: 'include' })
         .then((res) => {
           if (!res.ok) throw new Error('Failed to fetch therapists');
           return res.json();
@@ -65,7 +66,7 @@ export default function AdminPage() {
         });
       
       // Fetch services
-      fetch(`/api/admin/services?key=${adminKey}`)
+      fetch(`/api/admin/services`, { credentials: 'include' })
         .then((res) => {
             if (!res.ok) throw new Error('Failed to fetch services');
             return res.json();
@@ -88,7 +89,7 @@ export default function AdminPage() {
         });
 
       // Fetch bookings
-      fetch(`/api/admin/bookings?key=${adminKey}`)
+      fetch(`/api/admin/bookings`, { credentials: 'include' })
         .then((res) => {
             if (!res.ok) throw new Error('Failed to fetch bookings');
             return res.json();
@@ -114,6 +115,7 @@ export default function AdminPage() {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsedData),
+        credentials: 'include',
       });
 
       if (res.ok) {
@@ -131,7 +133,7 @@ export default function AdminPage() {
 
   const handleDeleteTherapist = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this therapist?')) {
-      const res = await fetch(`/api/admin/therapists/${id}?key=${adminKey}`, { method: 'DELETE' });
+      const res = await fetch(`/api/admin/therapists/${id}?key=${adminKey}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Therapist deleted' });
         setTherapists(therapists.filter((t) => t.id !== id));
@@ -169,6 +171,7 @@ export default function AdminPage() {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsedData),
+        credentials: 'include',
       });
 
       if (res.ok) {
@@ -186,7 +189,7 @@ export default function AdminPage() {
 
   const handleDeleteService = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this service?')) {
-      const res = await fetch(`/api/admin/services/${id}?key=${adminKey}`, { method: 'DELETE' });
+      const res = await fetch(`/api/admin/services/${id}?key=${adminKey}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Service deleted' });
         setServices(services.filter((s) => s.id !== id));
@@ -221,6 +224,7 @@ export default function AdminPage() {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsedData),
+        credentials: 'include',
       });
       if (res.ok) {
         toast({ title: 'Package saved successfully' });
@@ -237,7 +241,7 @@ export default function AdminPage() {
 
   const handleDeletePackage = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this package?')) {
-      const res = await fetch(`/api/packages/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/packages/${id}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Package deleted' });
         setPackages(packages.filter((p) => p.id !== id));
@@ -259,7 +263,7 @@ export default function AdminPage() {
 
   const handleDeleteBooking = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this booking?')) {
-      const res = await fetch(`/api/admin/bookings/${id}?key=${adminKey}`, { method: 'DELETE' });
+      const res = await fetch(`/api/admin/bookings/${id}?key=${adminKey}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Booking deleted' });
         setBookings(bookings.filter((b) => b.id !== id));

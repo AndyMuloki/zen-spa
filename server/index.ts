@@ -4,10 +4,17 @@ import { setupVite, serveStatic, log } from "./vite";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import adminRoutes from "./admin";
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Add CORS middleware BEFORE session middleware
+app.use(cors({
+  origin: 'https://mimispa.spa',
+  credentials: true,
+}));
 
 const PgSession = pgSession(session);
 
