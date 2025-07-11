@@ -65,6 +65,14 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/admin", adminRoutes);
+app.get('/test-cookie', (req, res) => {
+  res.cookie('testcookie', 'hello', {
+    secure: true,
+    sameSite: 'none',
+    httpOnly: true,
+  });
+  res.json({ message: 'Test cookie set' });
+});
 
 (async () => {
   const server = await registerRoutes(app);

@@ -27,7 +27,7 @@ adminRoutes.post("/login", (req, res) => {
     password === process.env.ADMIN_PASSWORD
   ) {
     req.session.isAdmin = true;
-    console.log('Session after login:', req.session); // Debug log
+    console.log('Session after login:', req.session); // /////Debug log
     req.session.save((err) => {
       if (err) {
         return res.status(500).json({ message: "Session save error" });
