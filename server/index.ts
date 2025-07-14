@@ -9,6 +9,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.set('trust proxy', 1); // trust first proxy
+
 const PgSession = pgSession(session);
 
 app.use(
