@@ -205,7 +205,7 @@ export default function AdminPage() {
   const handleSavePackage = async (e: FormEvent) => {
     e.preventDefault();
     if (!editingPackage) return;
-    const url = editingPackage.id ? `/api/packages/${editingPackage.id}` : '/api/packages';
+    const url = editingPackage.id ? `/api/admin/packages/${editingPackage.id}` : '/api/admin/packages';
     const method = editingPackage.id ? 'PUT' : 'POST';
     try {
       const dataToSave = {
@@ -221,6 +221,7 @@ export default function AdminPage() {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsedData),
+        credentials: 'include',
       });
       if (res.ok) {
         toast({ title: 'Package saved successfully' });
@@ -237,7 +238,7 @@ export default function AdminPage() {
 
   const handleDeletePackage = async (id: number) => {
     if (window.confirm('Are you sure you want to delete this package?')) {
-      const res = await fetch(`/api/packages/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/admin/packages/${id}`, { method: 'DELETE', credentials: 'include' });
       if (res.ok) {
         toast({ title: 'Package deleted' });
         setPackages(packages.filter((p) => p.id !== id));

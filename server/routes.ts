@@ -5,6 +5,9 @@ import { insertBookingSchema } from "@shared/schema";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 import type session from "express-session";
+import adminRoutes from "./admin";
+import isAdmin from "./admin";
+import { Router, Request, Response, NextFunction } from "express";
 
 // Extend express-session to include flash property
 declare module "express-session" {
@@ -42,7 +45,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all packages
+  // Get all packages (public)
   app.get("/api/packages", async (req, res) => {
     try {
       const packages = await storage.getAllPackages();
@@ -53,8 +56,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Create a package
-  app.post("/api/packages", async (req, res) => {
+  // Admin-protected package routes
+  app.post("/api/admin/packages", isAdmin, async (req, res) => {
     try {
       const pkg = req.body;
       const created = await storage.createPackage(pkg);
@@ -65,8 +68,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Update a package
-  app.put("/api/packages/:id", async (req, res) => {
+  app.put("/api/admin/packages/:id", isAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const pkg = req.body;
@@ -78,8 +80,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Delete a package
-  app.delete("/api/packages/:id", async (req, res) => {
+  app.delete("/api/admin/packages/:id", isAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       await storage.deletePackage(id);
