@@ -14,6 +14,7 @@ import TermsOfService from "@/pages/terms-of-service";
 import CancellationPolicy from "@/pages/cancellation-policy";
 import FAQ from "@/pages/faq";
 import GiftCertificates from "@/pages/gift-certificates";
+import { useEffect } from "react";
 
 // Initialize Google Analytics 4 (replace with your GA4 Measurement ID)
 ReactGA.initialize("G-B531HTTM0Q");
@@ -41,6 +42,13 @@ function Router() {
 }
 
 function App() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    // Track page view on every route change
+    ReactGA.send({ hitType: "pageview", page: location });
+  }, [location]);
+
   return (
     <TooltipProvider>
       <Toaster />
