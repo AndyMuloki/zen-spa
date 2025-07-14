@@ -21,6 +21,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production", // true in production
+      sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax", // "lax" is safest for same-origin
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
