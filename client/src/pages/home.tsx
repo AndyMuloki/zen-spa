@@ -45,6 +45,27 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mimispa.spa" />
         <meta property="og:image" content="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "HealthAndBeautyBusiness",
+              "name": "Mimi Spa",
+              "image": "https://mimispa.spa/logo.png",
+              "url": "https://mimispa.spa",
+              "telephone": "+254743087666",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Korosho Road",
+                "addressLocality": "Nairobi",
+                "addressCountry": "KE"
+              },
+              "openingHours": "Mo-Su 09:00-00:00",
+              "priceRange": "$$",
+              "description": "Experience tranquility and renewal at Mimi Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment."
+            }
+          `}
+        </script>
       </Helmet>
       <Hero />
       <Services />

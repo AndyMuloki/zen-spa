@@ -81,6 +81,7 @@ function TherapistCard({ therapist, index }: TherapistCardProps) {
         src={therapist.image} 
         alt={therapist.name} 
         className="w-full h-64 object-cover"
+        loading="lazy"
       />
       <div className="p-6">
         <h3 className="text-xl font-serif text-gray-100 mb-2">{therapist.name}</h3>

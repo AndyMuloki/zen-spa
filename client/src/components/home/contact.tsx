@@ -72,15 +72,20 @@ export default function Contact() {
             data-animate
           >
             <div className="h-64 bg-neutral-light relative">
-              <img 
-                src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=600" 
-                alt="Mimi Spa Location" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7977.611856227106!2d36.76434693850682!3d-1.2907574947878866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1a11b9fc68ad%3A0x6576c117231844b2!2sValley%20Arcade%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1752840061438!5m2!1sen!2ske"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Valley Arcade, Nairobi Map"
+                className="w-full h-full rounded-t-lg"
+              ></iframe>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="bg-white bg-opacity-90 p-4 rounded-md text-center shadow-md">
                   <p className="font-medium text-primary">Interactive Map</p>
-                  {/* <p className="text-sm text-neutral-dark opacity-80">(Map would be implemented here)</p> */}
                 </div>
               </div>
             </div>
@@ -90,7 +95,7 @@ export default function Contact() {
                 <div className="flex items-start">
                   <MapPin className="text-teal-400 mr-3 mt-1 h-5 w-5 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">Gitanga Road</p>
+                    <p className="text-gray-300">Valley Arcade</p>
                     <p className="text-gray-300">Lavington, Nairobi</p>
                   </div>
                 </div>
