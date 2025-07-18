@@ -93,6 +93,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         src={service.image} 
         alt={service.name} 
         className="w-full h-60 object-cover"
+        loading="lazy"   // added lazy loading...
       />
       <div className="p-6">
         <div className="flex justify-between items-start mb-4">
