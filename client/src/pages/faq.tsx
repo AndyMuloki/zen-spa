@@ -12,6 +12,46 @@ export default function FAQ() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mimispa.spa/faq" />
         <meta property="og:image" content="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630" />
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How do I book an appointment?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You can book online through our website or call us directly at +254740006578."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What should I bring to my appointment?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Just yourself! We provide everything you need for your spa experience."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I request a specific therapist?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, you can request a therapist when booking, subject to availability."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is your cancellation policy?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Please notify us at least 24 hours in advance to cancel or reschedule. See our Cancellation Policy for details."
+                }
+              }
+            ]
+          }
+        `}</script>
       </Helmet>
       <div className="container mx-auto px-4 py-24 max-w-2xl">
         <h1 className="text-3xl font-serif font-bold mb-6 text-primary">Frequently Asked Questions</h1>
