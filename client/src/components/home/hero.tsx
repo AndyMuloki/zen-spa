@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section 
       className="relative h-screen bg-cover bg-center" 
-      style={{ backgroundImage: "url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&h=1200')" }}
+      style={{ backgroundImage: "url('https://res.cloudinary.com/dlihqzf9t/image/upload/c_fill,h_630,w_1200,q_auto,f_auto/v1753257416/home_page_kyp1zp.jpg')" }}
     >
       <div className="absolute inset-0 bg-gray-800 bg-opacity-30"></div>
       <div className="container mx-auto px-4 h-full flex items-center relative z-10">
