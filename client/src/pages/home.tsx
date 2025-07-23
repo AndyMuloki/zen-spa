@@ -38,13 +38,19 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Mimi Spa - Modern Massage & Wellness</title>
-        <meta name="description" content="Experience tranquility and renewal at Mimi Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment." />
-        <meta property="og:title" content="Mimi Spa - Modern Massage & Wellness" />
-        <meta property="og:description" content="Experience tranquility and renewal at Mimi Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment." />
+        {/* <title>Mimi Spa - Modern Massage & Wellness</title> */}
+        <title>Mimi Spa - Relaxing Massages, Wellness & Holistic Therapies in Lavington</title> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+        <meta name="description" content="Discover tranquility and renewal at Mimi Spa in Lavington. We offer expert massage services (deep tissue, Swedish, hot stone, ) and skilled therapists provide relaxation and healing in a peaceful environment." />
+        <meta name="keywords" content="Mimi Spa, massage Lavington, spa Lavington, wellness Lavington, deep tissue massage, Swedish massage, hot stone massage, relaxation, healing, holistic therapy, spa services, best spa Lavington" />    
+        <meta property="og:title" content="Mimi Spa - Modern Massage & Wellness in Lavington" />
+        <meta property="og:description" content="Experience tranquility and renewal at Mimi Spa in Lavington. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment. Book your serene escape today!" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mimispa.spa" />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=630" />
+        <meta property="og:image" content="https://res.cloudinary.com/dlihqzf9t/image/upload/c_fill,h_630,w_1200,q_auto,f_auto/v1753257416/home_page_kyp1zp.jpg" />
+        <meta property="og:image:width" content="1200" /> 
+        <meta property="og:image:height" content="630" /> 
+        <meta property="og:image:alt" content="Interior of Mimi Spa with serene massage room" /> 
         <script type="application/ld+json">
           {`
             {
@@ -56,13 +62,15 @@ export default function Home() {
               "telephone": "+254743087666",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Korosho Road",
+                "streetAddress": "Gitanga Road",
                 "addressLocality": "Nairobi",
+                "addressRegion": "Nairobi County",
                 "addressCountry": "KE"
               },
               "openingHours": "Mo-Su 09:00-00:00",
               "priceRange": "$$",
-              "description": "Experience tranquility and renewal at Mimi Spa. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment."
+              "description": "Experience tranquility and renewal at Mimi Spa in Lavington. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment.",
+              "servesCuisine": "Spa Services",
             }
           `}
         </script>
