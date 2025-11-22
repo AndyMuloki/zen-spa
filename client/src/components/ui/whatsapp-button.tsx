@@ -22,6 +22,14 @@ export default function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonP
       action: "Click WhatsApp Button",
       label: "WhatsApp CTA"
     });
+    
+    // Fire Google Ads conversion event
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
+      });
+    }
+    
     // Let the navigation proceed after event fires
     // (GA4 events are async but fast; no need to delay navigation)
   };
