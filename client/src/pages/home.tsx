@@ -26,6 +26,23 @@ export default function Home() {
       document.head.appendChild(newMetaDescription);
     }
     
+    // Google Ads conversion tracking - fires on home page view
+    if (typeof window !== 'undefined') {
+      const gtagFunction = (window as any).gtag;
+      if (gtagFunction) {
+        gtagFunction('event', 'conversion', {
+          'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
+        });
+      } else {
+        // Fallback: push to dataLayer if gtag function isn't ready yet
+        const dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({
+          'event': 'conversion',
+          'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
+        });
+      }
+    }
+    
     // Initialize animations
     animateOnScroll();
     
