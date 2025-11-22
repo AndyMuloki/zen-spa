@@ -17,7 +17,8 @@ import GiftCertificates from "@/pages/gift-certificates";
 import { useEffect } from "react";
 
 // Initialize Google Analytics 4 (replace with your GA4 Measurement ID)
-ReactGA.initialize("G-B531HTTM0Q");
+// ReactGA.initialize("G-B531HTTM0Q");
+ReactGA.initialize("G-84XT1LF8RH");
 
 function Router() {
   const [location] = useLocation();
