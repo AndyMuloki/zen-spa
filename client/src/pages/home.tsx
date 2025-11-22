@@ -10,6 +10,7 @@ import BookingForm from "@/components/booking/booking-form";
 import { Calendar } from "lucide-react";
 import { animateOnScroll } from "@/lib/animations";
 import { Helmet } from "react-helmet-async";
+import { fireGoogleAdsConversion } from "@/lib/utils";
 
 export default function Home() {
   useEffect(() => {
@@ -27,21 +28,8 @@ export default function Home() {
     }
     
     // Google Ads conversion tracking - fires on home page view
-    if (typeof window !== 'undefined') {
-      const gtagFunction = (window as any).gtag;
-      if (gtagFunction) {
-        gtagFunction('event', 'conversion', {
-          'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
-        });
-      } else {
-        // Fallback: push to dataLayer if gtag function isn't ready yet
-        const dataLayer = (window as any).dataLayer || [];
-        dataLayer.push({
-          'event': 'conversion',
-          'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
-        });
-      }
-    }
+    // Uses a utility function that waits for gtag to be available
+    fireGoogleAdsConversion('AW-17674747763/NSUgCM2gxLIbEPP-_OtB');
     
     // Initialize animations
     animateOnScroll();
