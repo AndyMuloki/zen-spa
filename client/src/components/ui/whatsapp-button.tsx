@@ -24,14 +24,22 @@ export default function WhatsAppButton({ phoneNumber, message }: WhatsAppButtonP
     });
     
     // Fire Google Ads conversion event
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'conversion', {
-        'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
-      });
+    // Check if gtag is available (either from window or dataLayer)
+    if (typeof window !== 'undefined') {
+      const gtagFunction = (window as any).gtag;
+      if (gtagFunction) {
+        gtagFunction('event', 'conversion', {
+          'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
+        });
+      } else {
+        // Fallback: push to dataLayer if gtag function isn't ready yet
+        const dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({
+          'event': 'conversion',
+          'send_to': 'AW-17674747763/NSUgCM2gxLIbEPP-_OtB'
+        });
+      }
     }
-    
-    // Let the navigation proceed after event fires
-    // (GA4 events are async but fast; no need to delay navigation)
   };
 
   return (
