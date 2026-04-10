@@ -1,17 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { type Service } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { services } from "@/data/services";
 
 export default function Services() {
   const titleRef = useRef<HTMLDivElement>(null);
   const isTitleVisible = useIntersectionObserver(titleRef, { threshold: 0.1 });
-
-  const { data: services, isLoading, error } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
-  });
 
   return (
     <section id="services" className="py-20 bg-gray-800">
@@ -31,19 +27,7 @@ export default function Services() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {isLoading && (
-            Array(6).fill(0).map((_, index) => (
-              <ServiceCardSkeleton key={index} />
-            ))
-          )}
-          
-          {error && (
-            <div className="col-span-3 text-center text-destructive">
-              <p>Failed to load services. Please try again later.</p>
-            </div>
-          )}
-          
-          {services?.map((service, index) => (
+          {services.map((service, index) => (
             <ServiceCard 
               key={service.id} 
               service={service} 
