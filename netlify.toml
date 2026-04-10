@@ -1,3 +1,4 @@
 [build]
-  command = "npm install && npm run build:client"
-  publish = "dist/public"
+  base    = "client"
+  command = "cd .. && npm install && cd client && npx vite build"
+  publish = "dist"
