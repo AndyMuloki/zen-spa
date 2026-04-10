@@ -1,17 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useRef } from "react";
 import { type Therapist } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { therapists } from "@/data/therapists";
 
 export default function Therapists() {
   const titleRef = useRef<HTMLDivElement>(null);
   const isTitleVisible = useIntersectionObserver(titleRef, { threshold: 0.1 });
-
-  const { data: therapists, isLoading, error } = useQuery<Therapist[]>({
-    queryKey: ["/api/therapists"],
-  });
 
   return (
     <section id="therapists" className="py-20 bg-gray-900">
@@ -31,19 +27,7 @@ export default function Therapists() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {isLoading && (
-            Array(6).fill(0).map((_, index) => (
-              <TherapistCardSkeleton key={index} />
-            ))
-          )}
-          
-          {error && (
-            <div className="col-span-3 text-center text-destructive">
-              <p>Failed to load therapists. Please try again later.</p>
-            </div>
-          )}
-          
-          {therapists?.map((therapist, index) => (
+          {therapists.map((therapist, index) => (
             <TherapistCard 
               key={therapist.id} 
               therapist={therapist} 
