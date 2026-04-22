@@ -70,7 +70,7 @@ export default function Home() {
               "openingHours": "Mo-Su 09:00-00:00",
               "priceRange": "$$",
               "description": "Experience tranquility and renewal at Mimi Spa in Lavington. Our massage services and skilled therapists provide relaxation and healing in a peaceful environment.",
-              "servesCuisine": "Spa Services",
+              "servesCuisine": "Spa Services"
             }
           `}
         </script>
